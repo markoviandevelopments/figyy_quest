@@ -8,6 +8,8 @@
 #include <pthread.h>
 #include <string.h>
 #include <stdlib.h>
+#include "draw_chessboard.h"
+
 
 #define BOARD_SIZE 32       // Number of squares per row and column
 #define SQUARE_SIZE 2.0f    // Size of each square
@@ -250,7 +252,10 @@ int main(void) {
 
         BeginMode3D(camera);
 
+        DrawChessboard(BOARD_SIZE, SQUARE_SIZE);
+
         // Draw the chessboard
+        /*
         for (int z = 0; z < BOARD_SIZE; z++) {
             for (int x = 0; x < BOARD_SIZE; x++) {
                 // Determine square color (alternating pattern)
@@ -268,6 +273,11 @@ int main(void) {
                 DrawCubeWires(position, SQUARE_SIZE, 0.2f, SQUARE_SIZE, BLACK);  // Outline
             }
         }
+        */
+
+
+        // Call functions to draw other shapes
+
 
         // Draw other players
         pthread_mutex_lock(&players_mutex);
