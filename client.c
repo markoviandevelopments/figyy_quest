@@ -8,6 +8,7 @@
 #include <pthread.h>
 #include <string.h>
 #include <stdlib.h>
+#include "draw_tree.h"
 
 
 #include "draw_chessboard.h"
@@ -25,6 +26,7 @@
 #define SERVER_PORT 12345
 #define BUFFER_SIZE 1024
 #define MAX_PLAYERS 10
+#define TREE_COUNT 42
 
 // Set the server IP address here
 #define SERVER_IP "10.1.10.79"
@@ -46,6 +48,7 @@ RemotePlayer remotePlayers[MAX_PLAYERS];
 int remotePlayerCount = 0;
 pthread_mutex_t players_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+LollipopTree lollipopTrees[TREE_COUNT];
 // Networking variables
 int client_socket;
 int my_id; // Store our assigned player ID
@@ -173,6 +176,8 @@ int main(void) {
 
     SetTargetFPS(60);
 
+    GenerateRandomLollipopTrees(lollipopTrees, TREE_COUNT, BOARD_SIZE * SQUARE_SIZE, SQUARE_SIZE);
+
     while (!WindowShouldClose()) {
         // Get frame time
         float deltaTime = GetFrameTime();
@@ -260,6 +265,9 @@ int main(void) {
         // Call all the external functions to draw shapes
         DrawChessboard(BOARD_SIZE, SQUARE_SIZE);
         DrawPyramid();
+        // Draw the lollipop trees
+        DrawLollipopTrees(lollipopTrees, TREE_COUNT);
+
 
 
         // Draw other players
