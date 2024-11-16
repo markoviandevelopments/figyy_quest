@@ -11,7 +11,7 @@
 #define PORT 12345
 #define MAX_CLIENTS 10
 #define BUFFER_SIZE 1024
-#define BROADCAST_INTERVAL 1 // seconds
+#define BROADCAST_INTERVAL 100000000L // nanoseconds
 #define PLAYER_HEIGHT 1.8f
 
 typedef struct {
@@ -56,7 +56,11 @@ void broadcast_positions() {
 // Thread function to periodically broadcast positions
 void *broadcast_thread(void *arg) {
     while (1) {
-        sleep(BROADCAST_INTERVAL);
+        struct timespec req;
+        req.tv_sec = 0;           // 0 seconds
+        req.tv_nsec = BROADCAST_INTERVAL; // In nanoseconds
+
+        nanosleep(&req, NULL);
         broadcast_positions();
     }
     return NULL;
