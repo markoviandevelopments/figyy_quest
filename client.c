@@ -11,6 +11,7 @@
 
 
 #include "draw_chessboard.h"
+#include "draw_pyramid.h"
 
 
 #define BOARD_SIZE 32       // Number of squares per row and column
@@ -258,7 +259,7 @@ int main(void) {
 
         // Call all the external functions to draw shapes
         DrawChessboard(BOARD_SIZE, SQUARE_SIZE);
-
+        DrawPyramid();
 
 
         // Draw other players
