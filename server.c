@@ -12,7 +12,7 @@
 #define MAX_CLIENTS 10
 #define BUFFER_SIZE 1024
 #define BROADCAST_INTERVAL 100000000L // nanoseconds
-#define PLAYER_HEIGHT 1.8f
+#define PLAYER_HEIGHT 0.2f
 
 typedef struct {
     int id;           // Player ID

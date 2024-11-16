@@ -11,7 +11,8 @@
 
 #define BOARD_SIZE 32       // Number of squares per row and column
 #define SQUARE_SIZE 2.0f    // Size of each square
-#define PLAYER_HEIGHT 1.8f  // Player height
+#define PLAYER_HEIGHT 0.2f  // Player height
+#define PLAYER_CAMERA_HEIGHT 1.8f  // Player view height
 #define GRAVITY -9.8f       // Gravity force
 #define MOVE_SPEED 4.0f     // Player movement speed
 #define JUMP_FORCE 5.0f     // Jump force
@@ -112,7 +113,7 @@ int main(void) {
     float total_time = 0;
 
     // Initialize the player
-    Player player = { .position = { 0.0f, PLAYER_HEIGHT, 10.0f }, .velocityY = 0.0f, .isGrounded = false, .yaw = 0.0f, .pitch = 0.0f };
+    Player player = { .position = { 0.0f, PLAYER_CAMERA_HEIGHT, 10.0f }, .velocityY = 0.0f, .isGrounded = false, .yaw = 0.0f, .pitch = 0.0f };
 
     // Connect to the server
     struct sockaddr_in server_address;
@@ -181,8 +182,8 @@ int main(void) {
         player.position.y += player.velocityY * deltaTime;
 
         // Check collisions with the chessboard (ground)
-        if (player.position.y <= PLAYER_HEIGHT) {
-            player.position.y = PLAYER_HEIGHT;
+        if (player.position.y <= PLAYER_CAMERA_HEIGHT) {
+            player.position.y = PLAYER_CAMERA_HEIGHT;
             player.velocityY = 0.0f;
             player.isGrounded = true;
         }
