@@ -272,10 +272,12 @@ int main(void) {
         // Draw other players
         pthread_mutex_lock(&players_mutex);
         for (int i = 0; i < remotePlayerCount; i++) {
+            /*
             // Skip rendering ourselves
             if (remotePlayers[i].id == my_id) {
                 continue;
             }
+            */
 
             // Draw other players as short rectangular prisms
             Vector3 otherPlayerPosition = remotePlayers[i].position;
