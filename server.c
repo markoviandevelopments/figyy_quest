@@ -11,7 +11,7 @@
 #define PORT 12345
 #define MAX_CLIENTS 10
 #define BUFFER_SIZE 1024
-#define BROADCAST_INTERVAL 50000000L // nanoseconds (50 ms)
+#define BROADCAST_INTERVAL 10000000L // nanoseconds (10 ms)
 #define PLAYER_HEIGHT 0.2f
 
 typedef struct {
