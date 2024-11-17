@@ -287,7 +287,7 @@ int main(void) {
 
             // Draw other players as short rectangular prisms
             Vector3 otherPlayerPosition = remotePlayers[i].position;
-            DrawCube((Vector3){otherPlayerPosition.x, PLAYER_HEIGHT, otherPlayerPosition.z}, 0.5f, 0.2f, 0.5f, RED);
+            DrawCube((Vector3){otherPlayerPosition.x, otherPlayerPosition.y - 1.6f, otherPlayerPosition.z}, 0.5f, PLAYER_HEIGHT, 0.5f, RED);
         }
         pthread_mutex_unlock(&players_mutex);
 
