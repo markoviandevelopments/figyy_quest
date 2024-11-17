@@ -182,6 +182,7 @@ int main(void) {
     Sound meow2 = LoadSound("meow2.wav");
     Sound meow3 = LoadSound("meow3.wav");
     Sound sound1 = LoadSound("sound1.wav");
+    Sound sound2 = LoadSound("sound2.wav");
 
 
 
@@ -284,6 +285,9 @@ int main(void) {
         if (IsKeyPressed(KEY_N)) {
             PlaySound(sound1);
         }
+        if (IsKeyPressed(KEY_B)) {
+            PlaySound(sound2);
+        }
 
         // Send position to server
         char buffer[BUFFER_SIZE];
@@ -359,6 +363,7 @@ int main(void) {
     UnloadSound(meow2);
     UnloadSound(meow3);
     UnloadSound(sound1);
+    UnloadSound(sound2);
     CloseAudioDevice();
 
     CloseWindow();
