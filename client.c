@@ -202,14 +202,12 @@ int main(void) {
         total_time += deltaTime;
 
         // Apply gravity if the player is not grounded
-        if (!player.isGrounded) {
+        if (!player.isGrounded && player.position.x > -33.0f && player.position.x < 31.0f && player.position.y > -33.0f && player.position.y < 31.0f) {
             player.velocityY += GRAVITY * deltaTime;
         }
 
         // Update player position based on velocity
-        if (player.position.x > -33.0f && player.position.x < 31.0f && player.position.y > -33.0f && player.position.y < 31.0f) {
-            player.position.y += player.velocityY * deltaTime;
-        }
+        player.position.y += player.velocityY * deltaTime;
 
         // Check collisions with the chessboard (ground)
         if (player.position.y <= PLAYER_CAMERA_HEIGHT) {
