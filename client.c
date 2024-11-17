@@ -13,6 +13,7 @@
 
 #include "draw_chessboard.h"
 #include "draw_pyramid.h"
+#include "draw_prestonhouse.h"
 
 
 #define BOARD_SIZE 32       // Number of squares per row and column
@@ -267,7 +268,7 @@ int main(void) {
         DrawPyramid();
         // Draw the lollipop trees
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-
+        DrawPrestonhouse();
 
 
         // Draw other players
