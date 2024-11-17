@@ -224,6 +224,10 @@ int main(void) {
             moveDirection.x += cos(DEG2RAD * player.yaw) * MOVE_SPEED * deltaTime;
             moveDirection.z += sin(DEG2RAD * player.yaw) * MOVE_SPEED * deltaTime;
         }
+        if (IsKeyDown(KEY_E)) {
+            moveDirection.x += cos(DEG2RAD * player.yaw) * MOVE_SPEED * 3.0f * deltaTime;
+            moveDirection.z += sin(DEG2RAD * player.yaw) * MOVE_SPEED * 3.0f * deltaTime;
+        }
         if (IsKeyDown(KEY_S)) {
             moveDirection.x -= cos(DEG2RAD * player.yaw) * MOVE_SPEED * deltaTime;
             moveDirection.z -= sin(DEG2RAD * player.yaw) * MOVE_SPEED * deltaTime;
