@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include <string.h>
 #include <stdlib.h>
+#include "raymath.h"
 
 
 typedef struct {
@@ -14,7 +15,7 @@ typedef struct {
 } Cat;
 
 
-Cat DrawPrestonhouse(long double server_time) {
+Cat DrawPrestonhouse(long double server_time, Camera3D *camera) {
     float dist;
     Cat cat;
     int x_c = 0;
@@ -166,6 +167,44 @@ Cat DrawPrestonhouse(long double server_time) {
 
 
 
+
+
+
+
+    static Model model4 = { 0 };
+    static bool isModel4Loaded = false;
+
+    if (!isModel4Loaded) {
+        // Load the model
+        model4 = LoadModel("model_4.obj"); // Ensure the model file is in the correct directory
+
+        // Check if the model has normals
+        if (model4.meshes[0].normals == NULL) {
+            printf("NO NORMALS\n");
+            // Optionally generate normals if needed
+            // GenMeshTangents(&model4.meshes[0]); // Not necessary for flat shading
+        }
+
+        isModel4Loaded = true;
+    }
+
+    // Define model transformation parameters
+    Vector3 modelPosition4 = { 9.0f, 0.3f, -1.6f };
+    Vector3 modelScale4 = { 0.02f, 0.02f, 0.02f };
+    Vector3 rotationAxis4 = { 1.0f, 0.0f, 0.0f };
+    float rotationAngle4 = sin(GetTime() * 0.5f * (sin(GetTime() * 0.1f) + 1)) * 5.0f - 90.0f;
+
+    // Draw the model with rotation and scaling
+    DrawModelEx(model4, modelPosition4, rotationAxis4, rotationAngle4, modelScale4, (Color) {50, 50, 50, 215});
+
+    // Draw the model wireframe over it
+    DrawModelWiresEx(model4, modelPosition4, rotationAxis4, rotationAngle4, modelScale4, BLACK);
+
+
+
+
+
     return cat;
 
 }
+

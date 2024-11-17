@@ -307,7 +307,7 @@ int main(void) {
         DrawPyramid();
         // Draw the lollipop trees
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-        cat = DrawPrestonhouse(server_time);
+        cat = DrawPrestonhouse(server_time, &camera);
 
 
         // Draw other players
