@@ -76,8 +76,8 @@ Cat DrawPrestonhouse(long double server_time) {
     static Model model = { 0 };
     static bool isModelLoaded = false;
     if (!isModelLoaded) {
-        model = LoadModel("model.obj"); // Load the model
-        Texture2D texture = LoadTexture("texture.png"); // Load the texture
+        model = LoadModel("models/model.obj"); // Load the model
+        Texture2D texture = LoadTexture("models/texture.png"); // Load the texture
 
         // Attach the texture to the material
         model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
@@ -110,8 +110,8 @@ Cat DrawPrestonhouse(long double server_time) {
     static Model model2 = { 0 };
     static bool isModel2Loaded = false;
     if (!isModel2Loaded) {
-        model2 = LoadModel("model_2.obj"); // Load the model
-        Texture2D texture2 = LoadTexture("texture_2.png"); // Load the texture
+        model2 = LoadModel("models/model_2.obj"); // Load the model
+        Texture2D texture2 = LoadTexture("models/texture_2.png"); // Load the texture
 
         // Attach the texture to the material
         model2.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture2;
@@ -140,8 +140,8 @@ Cat DrawPrestonhouse(long double server_time) {
     static Model model3 = { 0 };
     static bool isModel3Loaded = false;
     if (!isModel3Loaded) {
-        model3 = LoadModel("model_3.obj"); // Load the model
-        Texture2D texture3 = LoadTexture("texture_3.png"); // Load the texture
+        model3 = LoadModel("models/model_3.obj"); // Load the model
+        Texture2D texture3 = LoadTexture("models/texture_3.png"); // Load the texture
 
         // Attach the texture to the material
         model3.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture3;
@@ -176,7 +176,7 @@ Cat DrawPrestonhouse(long double server_time) {
 
     if (!isModel4Loaded) {
         // Load the model
-        model4 = LoadModel("model_4.obj"); // Ensure the model file is in the correct directory
+        model4 = LoadModel("models/model_4.obj"); // Ensure the model file is in the correct directory
 
         // Check if the model has normals
         if (model4.meshes[0].normals == NULL) {
@@ -192,13 +192,47 @@ Cat DrawPrestonhouse(long double server_time) {
     Vector3 modelPosition4 = { 9.0f, 0.3f, -1.6f };
     Vector3 modelScale4 = { 0.02f, 0.02f, 0.02f };
     Vector3 rotationAxis4 = { 1.0f, 0.0f, 0.0f };
-    float rotationAngle4 = sin(GetTime() * 0.5f * (sin(GetTime() * 0.1f) + 1)) * 5.0f - 90.0f;
+    float rotationAngle4 = sin(GetTime() * 0.5f * (sin(GetTime() * 0.1238764287f) + 1)) * 5.0f - 90.0f;
 
     // Draw the model with rotation and scaling
     DrawModelEx(model4, modelPosition4, rotationAxis4, rotationAngle4, modelScale4, (Color) {50, 50, 50, 215});
 
     // Draw the model wireframe over it
     DrawModelWiresEx(model4, modelPosition4, rotationAxis4, rotationAngle4, modelScale4, BLACK);
+
+
+
+
+
+
+    static Model model5 = { 0 };
+    static bool isModel5Loaded = false;
+
+    if (!isModel5Loaded) {
+        // Load the model
+        model5 = LoadModel("models/model_5.obj"); // Ensure the model file is in the correct directory
+
+        // Check if the model has normals
+        if (model5.meshes[0].normals == NULL) {
+            printf("NO NORMALS\n");
+            // Optionally generate normals if needed
+            // GenMeshTangents(&model4.meshes[0]); // Not necessary for flat shading
+        }
+
+        isModel4Loaded = true;
+    }
+
+    // Define model transformation parameters
+    Vector3 modelPosition5 = { -10.0f, 1.5f, 20.6f };
+    Vector3 modelScale5 = { 0.15f, 0.15f, 0.15f };
+    Vector3 rotationAxis5 = { 1.0f, 0.0f, 0.0f };
+    float rotationAngle5 = sin(GetTime() * 0.5f * (sin(GetTime() * 0.1238764287f) + 1)) * 0.01f + 90.0f;
+
+    // Draw the model with rotation and scaling
+    DrawModelEx(model5, modelPosition5, rotationAxis5, rotationAngle5, modelScale5, (Color) {20, 80, 150, 255});
+
+    // Draw the model wireframe over it
+    DrawModelWiresEx(model5, modelPosition5, rotationAxis5, rotationAngle5, modelScale5, BLACK);
 
 
 

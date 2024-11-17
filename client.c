@@ -178,11 +178,11 @@ int main(void) {
     InitAudioDevice();
 
     // Load the meow sound
-    Sound meow = LoadSound("meow.wav");
-    Sound meow2 = LoadSound("meow2.wav");
-    Sound meow3 = LoadSound("meow3.wav");
-    Sound sound1 = LoadSound("sound1.wav");
-    Sound sound2 = LoadSound("sound2.wav");
+    Sound meow = LoadSound("sounds/meow.wav");
+    Sound meow2 = LoadSound("sounds/meow2.wav");
+    Sound meow3 = LoadSound("sounds/meow3.wav");
+    Sound sound1 = LoadSound("sounds/sound1.wav");
+    Sound sound2 = LoadSound("sounds/sound2.wav");
 
 
 
@@ -298,7 +298,7 @@ int main(void) {
             char time_str[30];
             snprintf(time_str, sizeof(time_str), "%ld", current_time - 1466112000);
             char filename_string[40];
-            strcpy(filename_string, "screenshot_");
+            strcpy(filename_string, "screenshots/screenshot_");
             strcat(filename_string, time_str);
             strcat(filename_string, ".png");
             TakeScreenshot(filename_string);
