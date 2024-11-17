@@ -40,6 +40,7 @@ typedef struct {
     float pitch;       // Vertical angle
 } Player;
 
+
 typedef struct {
     int id;
     Vector3 position;
@@ -60,7 +61,6 @@ void *receive_updates(void *arg) {
     char buffer[BUFFER_SIZE];
     char recv_buffer[BUFFER_SIZE];
     int recv_buffer_len = 0;
-
     while (1) {
         ssize_t bytes_read = recv(client_socket, buffer, BUFFER_SIZE - 1, 0);
         if (bytes_read <= 0) {
@@ -124,9 +124,10 @@ void *receive_updates(void *arg) {
 int main(void) {
 
     float total_time = 0;
-    float cat_x = 0;
-    float cat_z;
     server_time = 0.0L;
+    Cat cat;
+    cat.x = 0.0f;
+    cat.z = 0.0f;
     // Initialize the player
     Player player = { .position = { 0.0f, PLAYER_CAMERA_HEIGHT, 10.0f }, .velocityY = 0.0f, .isGrounded = false, .yaw = 0.0f, .pitch = 0.0f };
 
@@ -267,7 +268,8 @@ int main(void) {
         camera.target.z = player.position.z + forward.z;
 
         // Play the sound when the m key is pressed
-        if (IsKeyPressed(KEY_M)) {
+        float dist_to_cat = pow(pow(cat.x - player.position.x, 2) + pow(cat.z - player.position.z, 2), 0.5);
+        if (IsKeyPressed(KEY_M) || (dist_to_cat < 5.0f && (rand() % 100) == 0)) {
             int r = rand() % 3;
             if (r == 0) {
                 PlaySound(meow);
@@ -296,7 +298,7 @@ int main(void) {
         DrawPyramid();
         // Draw the lollipop trees
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-        DrawPrestonhouse(server_time);
+        cat = DrawPrestonhouse(server_time);
 
 
         // Draw other players

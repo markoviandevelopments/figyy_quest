@@ -8,8 +8,15 @@
 #include <stdlib.h>
 
 
-void DrawPrestonhouse(long double server_time) {
+typedef struct {
+    float x;
+    float z;
+} Cat;
+
+
+Cat DrawPrestonhouse(long double server_time) {
     float dist;
+    Cat cat;
     int x_c = 0;
     int z_c = 1;
     for (float x = -3; x < 3; x+= 0.1f) {
@@ -85,7 +92,9 @@ void DrawPrestonhouse(long double server_time) {
     }
 
     // Draw the loaded model
-    Vector3 modelPosition = { 10.4f - fabs(10.0f * sin(server_time * 0.06f)), 0.2f, 0.0f  + fabs(2.8f * sin(server_time * 0.06f))}; // Adjust position as needed
+    cat.x = 10.4f - fabs(10.0f * sin(server_time * 0.06f));
+    cat.z = 0.0f  + fabs(2.8f * sin(server_time * 0.06f));
+    Vector3 modelPosition = { cat.x, 0.2f, cat.z}; // Adjust position as needed
     Vector3 modelScale = { 0.03f, 0.03f, 0.03f };    // Scale factor (1/5 = 0.2)
 
     // Combine the two rotations into one axis and angle
@@ -125,5 +134,6 @@ void DrawPrestonhouse(long double server_time) {
     // Draw the model with rotation and scaling
     DrawModelEx(model2, modelPosition2, rotationAxis2, rotationAngle2, modelScale2, WHITE);
 
+    return cat;
 
 }
