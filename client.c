@@ -181,6 +181,7 @@ int main(void) {
     Sound meow = LoadSound("meow.wav");
     Sound meow2 = LoadSound("meow2.wav");
     Sound meow3 = LoadSound("meow3.wav");
+    Sound sound1 = LoadSound("sound1.wav");
 
 
 
@@ -280,6 +281,10 @@ int main(void) {
             }
         }
 
+        if (IsKeyPressed(KEY_N)) {
+            PlaySound(sound1);
+        }
+
         // Send position to server
         char buffer[BUFFER_SIZE];
         snprintf(buffer, BUFFER_SIZE, "%f %f %f\n", player.position.x, player.position.y, player.position.z);
@@ -353,6 +358,7 @@ int main(void) {
     UnloadSound(meow);
     UnloadSound(meow2);
     UnloadSound(meow3);
+    UnloadSound(sound1);
     CloseAudioDevice();
 
     CloseWindow();
