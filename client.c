@@ -298,8 +298,9 @@ int main(void) {
         DrawText("Press [ESC] to exit", 10, 40, 20, RED);
         char buffer_text[500];
         sprintf(buffer_text, "X: %f   Y: %f   Z: %f   Time: %f", player.position.x, player.position.y, player.position.z, total_time);
-        sprintf(buffer_text, "Server Time: %Lf", server_time);
         DrawText(buffer_text, 10, 70, 20, RED);
+        sprintf(buffer_text, "Server Time: %Lf", server_time);
+        DrawText(buffer_text, 10, 100, 20, RED);
 
         EndDrawing();
     }
