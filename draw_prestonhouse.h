@@ -102,10 +102,10 @@ void DrawPrestonhouse() {
     }
 
     // Draw the loaded model
-    Vector3 modelPosition2 = { 10.1f, 0.8f, 0.0f }; // Adjust position as needed
+    Vector3 modelPosition2 = { 8.7f, 0.8f, 0.0f }; // Adjust position as needed
     Vector3 modelScale2 = { 0.01f, 0.01f, 0.01f };    // Scale factor (1/5 = 0.2)
     Vector3 rotationAxis2 = { 0.0f, 0.5f, 0.5f };   // Rotation around Y-axis
-    float rotationAngle2 =  sin(GetTime() * 0.5f) * 15.0f + 180.0f;       // Rotate over time (30 degrees per second)
+    float rotationAngle2 =  sin(GetTime() * 0.5f * ( sin(GetTime() * 0.1f) + 1)) * 10.0f + 180.0f;       // Rotate over time (30 degrees per second)
 
     // Draw the model with rotation and scaling
     DrawModelEx(model2, modelPosition2, rotationAxis2, rotationAngle2, modelScale2, WHITE);
