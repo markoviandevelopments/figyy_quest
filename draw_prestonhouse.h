@@ -17,7 +17,7 @@ void DrawPrestonhouse(long double server_time) {
         x_c++;
         for (float z = -3; z < 3; z+= 0.1f) {
             x_c++;
-            Color squareColor = ((x_c + z_c) % 2 == 0) ? GREEN : BROWN;
+            Color squareColor = ((x_c + z_c) % 2 == 0) ? MAROON : RED;
             dist = pow(pow(x, 2) + pow(z, 2), 0.5f);
             if (dist < 2.95) {
                 Vector3 position = {
@@ -38,8 +38,11 @@ void DrawPrestonhouse(long double server_time) {
     float block_w = 0.05f;
     for (float y = 0.0f; y < 4.0f; y+= 0.04f) {
             for (float a = 0.0f; a < 6.29; a+= 0.01) {
-                // Determine square color (alternating pattern)
-                Color squareColor = (i % 2 == 0) ? PURPLE : ORANGE;
+                int rowIndex = (int)(y / 0.04f);
+                int colIndex = (int)(a / 0.01f);
+                Color squareColor = (rowIndex % 2 == 0) ? ((colIndex % 2 == 0) ? DARKBROWN : BROWN)
+                                       : ((colIndex % 2 == 0) ? BROWN : BEIGE);
+
                 // Position the square
                 r_f = 1.0f;
                 r_f_2 = 1.0f + 0.03f * sin(y * 15.0f);
