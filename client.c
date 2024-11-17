@@ -171,6 +171,16 @@ int main(void) {
     // Initialize the window
     InitWindow(1200, 800, "3D Chessboard with Angled Camera Control");
 
+    // Initialize the audio device
+    InitAudioDevice();
+
+    // Load the meow sound
+    Sound meow = LoadSound("meow.wav");
+    Sound meow2 = LoadSound("meow2.wav");
+    Sound meow3 = LoadSound("meow3.wav");
+
+
+
     // Initialize the camera
     Camera3D camera = { 0 };
     camera.position = player.position; // Camera position
@@ -254,6 +264,18 @@ int main(void) {
         camera.target.y = player.position.y + forward.y;
         camera.target.z = player.position.z + forward.z;
 
+        // Play the sound when the m key is pressed
+        if (IsKeyPressed(KEY_M)) {
+            int r = rand() % 3;
+            if (r == 0) {
+                PlaySound(meow);
+            } else if (r == 1) {
+                PlaySound(meow2);
+            } else {
+                PlaySound(meow3);
+            }
+        }
+
         // Send position to server
         char buffer[BUFFER_SIZE];
         snprintf(buffer, BUFFER_SIZE, "%f %f %f\n", player.position.x, player.position.y, player.position.z);
@@ -304,6 +326,12 @@ int main(void) {
 
         EndDrawing();
     }
+
+    // Unload the sound and close the audio device
+    UnloadSound(meow);
+    UnloadSound(meow2);
+    UnloadSound(meow3);
+    CloseAudioDevice();
 
     CloseWindow();
     close(client_socket);
