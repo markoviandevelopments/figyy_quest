@@ -8,9 +8,10 @@
 #include <pthread.h>
 #include <string.h>
 #include <stdlib.h>
+
+
+
 #include "draw_tree.h"
-
-
 #include "draw_chessboard.h"
 #include "draw_pyramid.h"
 #include "draw_prestonhouse.h"
