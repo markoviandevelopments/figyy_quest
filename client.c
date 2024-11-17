@@ -27,7 +27,7 @@
 #define SERVER_PORT 12345
 #define BUFFER_SIZE 1024
 #define MAX_PLAYERS 10
-#define TREE_COUNT 42
+#define TREE_COUNT 142
 
 // Set the server IP address here
 #define SERVER_IP "10.1.10.79"
