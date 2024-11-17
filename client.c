@@ -124,6 +124,8 @@ void *receive_updates(void *arg) {
 int main(void) {
 
     float total_time = 0;
+    float cat_x = 0;
+    float cat_z;
     server_time = 0.0L;
     // Initialize the player
     Player player = { .position = { 0.0f, PLAYER_CAMERA_HEIGHT, 10.0f }, .velocityY = 0.0f, .isGrounded = false, .yaw = 0.0f, .pitch = 0.0f };
