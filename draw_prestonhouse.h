@@ -82,5 +82,33 @@ void DrawPrestonhouse() {
     // Draw the model with rotation and scaling
     DrawModelEx(model, modelPosition, rotationAxis, rotationAngle, modelScale, WHITE);
 
+    static Model model2 = { 0 };
+    static bool isModel2Loaded = false;
+    if (!isModel2Loaded) {
+        model2 = LoadModel("model_2.obj"); // Load the model
+        Texture2D texture2 = LoadTexture("texture_2.png"); // Load the texture
+
+        // Attach the texture to the material
+        model2.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture2;
+
+        // Set texture scaling using a shader value
+        Shader shader = LoadShader(NULL, "resources/scaling.fs"); // Load a fragment shader for scaling
+        model2.materials[0].shader = shader;
+
+        // Pass texture scaling factor to the shader
+        float textureScale = 0.02f; // Scale down the texture
+        SetShaderValue(shader, GetShaderLocation(shader, "textureScale"), &textureScale, SHADER_UNIFORM_FLOAT);
+        isModel2Loaded = true;
+    }
+
+    // Draw the loaded model
+    Vector3 modelPosition2 = { 10.1f, 0.8f, 0.0f }; // Adjust position as needed
+    Vector3 modelScale2 = { 0.01f, 0.01f, 0.01f };    // Scale factor (1/5 = 0.2)
+    Vector3 rotationAxis2 = { 0.0f, 0.5f, 0.5f };   // Rotation around Y-axis
+    float rotationAngle2 =  sin(GetTime() * 0.5f) * 15.0f + 180.0f;       // Rotate over time (30 degrees per second)
+
+    // Draw the model with rotation and scaling
+    DrawModelEx(model2, modelPosition2, rotationAxis2, rotationAngle2, modelScale2, WHITE);
+
 
 }
