@@ -76,8 +76,8 @@ Cat DrawPrestonhouse(long double server_time) {
     static Model model = { 0 };
     static bool isModelLoaded = false;
     if (!isModelLoaded) {
-        model = LoadModel("models/model.obj"); // Load the model
-        Texture2D texture = LoadTexture("models/texture.png"); // Load the texture
+        model = LoadModel("models/cat.obj"); // Load the model
+        Texture2D texture = LoadTexture("models/cat_texture.png"); // Load the texture
 
         // Attach the texture to the material
         model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
@@ -110,8 +110,8 @@ Cat DrawPrestonhouse(long double server_time) {
     static Model model2 = { 0 };
     static bool isModel2Loaded = false;
     if (!isModel2Loaded) {
-        model2 = LoadModel("models/model_2.obj"); // Load the model
-        Texture2D texture2 = LoadTexture("models/texture_2.png"); // Load the texture
+        model2 = LoadModel("models/bed.obj"); // Load the model
+        Texture2D texture2 = LoadTexture("models/bed_texture.png"); // Load the texture
 
         // Attach the texture to the material
         model2.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture2;
@@ -140,8 +140,8 @@ Cat DrawPrestonhouse(long double server_time) {
     static Model model3 = { 0 };
     static bool isModel3Loaded = false;
     if (!isModel3Loaded) {
-        model3 = LoadModel("models/model_3.obj"); // Load the model
-        Texture2D texture3 = LoadTexture("models/texture_3.png"); // Load the texture
+        model3 = LoadModel("models/penguin.obj"); // Load the model
+        Texture2D texture3 = LoadTexture("models/penguin_texture.png"); // Load the texture
 
         // Attach the texture to the material
         model3.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture3;
@@ -176,7 +176,7 @@ Cat DrawPrestonhouse(long double server_time) {
 
     if (!isModel4Loaded) {
         // Load the model
-        model4 = LoadModel("models/model_4.obj"); // Ensure the model file is in the correct directory
+        model4 = LoadModel("models/water_bowl.obj"); // Ensure the model file is in the correct directory
 
         // Check if the model has normals
         if (model4.meshes[0].normals == NULL) {
@@ -210,7 +210,7 @@ Cat DrawPrestonhouse(long double server_time) {
 
     if (!isModel5Loaded) {
         // Load the model
-        model5 = LoadModel("models/model_5.obj"); // Ensure the model file is in the correct directory
+        model5 = LoadModel("models/dome_house.obj"); // Ensure the model file is in the correct directory
 
         // Check if the model has normals
         if (model5.meshes[0].normals == NULL) {

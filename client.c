@@ -58,7 +58,7 @@ int my_id; // Store our assigned player ID
 
 long double server_time;
 
-void *receive_updates(void *arg) {
+void *receive_updates(void *args) {
     char buffer[BUFFER_SIZE];
     char recv_buffer[BUFFER_SIZE];
     int recv_buffer_len = 0;
