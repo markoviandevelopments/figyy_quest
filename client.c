@@ -202,7 +202,7 @@ int main(void) {
         total_time += deltaTime;
 
         // Apply gravity if the player is not grounded
-        if (!player.isGrounded && player.position.x > -33.0f && player.position.x < 31.0f && player.position.y > -33.0f && player.position.y < 31.0f) {
+        if (!player.isGrounded) {
             player.velocityY += GRAVITY * deltaTime;
         }
 
@@ -240,7 +240,7 @@ int main(void) {
         player.position.z += moveDirection.z;
 
         // Jumping
-        if (IsKeyPressed(KEY_SPACE) && player.isGrounded) {
+        if (IsKeyPressed(KEY_SPACE) && player.isGrounded || player.position.x > 31) {
             player.velocityY = JUMP_FORCE;
             player.isGrounded = false;
         }
