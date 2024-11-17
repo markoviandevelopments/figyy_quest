@@ -207,7 +207,9 @@ int main(void) {
         }
 
         // Update player position based on velocity
-        player.position.y += player.velocityY * deltaTime;
+        if (player.position.x > -33.0f && player.position.x < 31.0f && player.position.y > -33.0f && player.position.y < 31.0f) {
+            player.position.y += player.velocityY * deltaTime;
+        }
 
         // Check collisions with the chessboard (ground)
         if (player.position.y <= PLAYER_CAMERA_HEIGHT) {
