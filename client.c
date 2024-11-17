@@ -303,6 +303,7 @@ int main(void) {
 
         // Draw other players
         pthread_mutex_lock(&players_mutex);
+        Color playercolor;
         for (int i = 0; i < remotePlayerCount; i++) {
             /*
             // Skip rendering ourselves
@@ -312,8 +313,20 @@ int main(void) {
             */
 
             // Draw other players as short rectangular prisms
+            switch (i % 5) {
+                case 0:
+                    playercolor = RED;
+                case 1:
+                    playercolor = BLUE;
+                case 2:
+                    playercolor = LIME;
+                case 3:
+                    playercolor = MAGENTA;
+                case 4:
+                    playercolor = (Color) {255, 255, 0, 100};
+            }
             Vector3 otherPlayerPosition = remotePlayers[i].position;
-            DrawCube((Vector3){otherPlayerPosition.x, otherPlayerPosition.y - 1.6f, otherPlayerPosition.z}, 0.9f, PLAYER_HEIGHT, 0.9f, RED);
+            DrawCube((Vector3){otherPlayerPosition.x, otherPlayerPosition.y - 1.6f, otherPlayerPosition.z}, 0.9f, PLAYER_HEIGHT, 0.9f, playercolor);
         }
         pthread_mutex_unlock(&players_mutex);
 
@@ -323,7 +336,7 @@ int main(void) {
         DrawText("Move with [WASD], look with [Arrow Keys], jump with [SPACE]", 10, 10, 20, RED);
         DrawText("Press [ESC] to exit", 10, 40, 20, RED);
         char buffer_text[500];
-        sprintf(buffer_text, "X: %f   Y: %f   Z: %f   Time: %f", player.position.x, player.position.y, player.position.z, total_time);
+        sprintf(buffer_text, "ID: %d   X: %f   Y: %f   Z: %f   Time: %f", my_id, player.position.x, player.position.y, player.position.z, total_time);
         DrawText(buffer_text, 10, 70, 20, RED);
         sprintf(buffer_text, "Server Time: %Lf", server_time);
         DrawText(buffer_text, 10, 100, 20, RED);
