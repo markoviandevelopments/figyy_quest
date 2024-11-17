@@ -18,7 +18,7 @@
 
 #define BOARD_SIZE 32       // Number of squares per row and column
 #define SQUARE_SIZE 2.0f    // Size of each square
-#define PLAYER_HEIGHT 0.2f  // Player height
+#define PLAYER_HEIGHT 0.4f  // Player height
 #define PLAYER_CAMERA_HEIGHT 1.8f  // Player view height
 #define GRAVITY -9.8f       // Gravity force
 #define MOVE_SPEED 4.0f     // Player movement speed
@@ -313,7 +313,7 @@ int main(void) {
 
             // Draw other players as short rectangular prisms
             Vector3 otherPlayerPosition = remotePlayers[i].position;
-            DrawCube((Vector3){otherPlayerPosition.x, otherPlayerPosition.y - 1.6f, otherPlayerPosition.z}, 0.5f, PLAYER_HEIGHT, 0.5f, RED);
+            DrawCube((Vector3){otherPlayerPosition.x, otherPlayerPosition.y - 1.6f, otherPlayerPosition.z}, 0.9f, PLAYER_HEIGHT, 0.9f, RED);
         }
         pthread_mutex_unlock(&players_mutex);
 
