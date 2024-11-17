@@ -150,13 +150,13 @@ Cat DrawPrestonhouse(long double server_time) {
         model3.materials[0].shader = shader3;
 
         // Pass texture scaling factor to the shader
-        float textureScale3 = 0.02f; // Scale down the texture
+        float textureScale3 = 1.0f; // Scale down the texture
         SetShaderValue(shader3, GetShaderLocation(shader3, "textureScale"), &textureScale3, SHADER_UNIFORM_FLOAT);
         isModel3Loaded = true;
     }
 
     // Draw the loaded model
-    Vector3 modelPosition3 = { 60.0f * sin(server_time * 0.01f), 0.8f, 60.0f * sin(server_time * 0.0124f) }; // Adjust position as needed
+    Vector3 modelPosition3 = { 30.0f * sin(server_time * 0.003f), 0.2f, 30.0f * sin(server_time * 0.00124f) }; // Adjust position as needed
     Vector3 modelScale3 = { 0.01f, 0.01f, 0.01f };    // Scale factor (1/5 = 0.2)
     Vector3 rotationAxis3 = { 0.0f, 0.5f, 0.5f };   // Rotation around Y-axis
     float rotationAngle3 =  sin(GetTime() * 0.5f * ( sin(GetTime() * 0.1f) + 1)) * 10.0f + 180.0f;       // Rotate over>
