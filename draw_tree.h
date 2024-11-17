@@ -11,7 +11,7 @@ typedef struct {
     float stickRadius;
     float headRadius;
     Color stickColor; // Color for the lollipop stick
-    Color headColor;  // Color for the lollipop head
+    Color headColor;  // Color for the lollipop head and ring
 } LollipopTree;
 
 // Function to draw a single lollipop tree
@@ -21,9 +21,15 @@ static inline void DrawLollipopTree(LollipopTree tree) {
     DrawCube(stickPosition, tree.stickRadius, tree.stickHeight, tree.stickRadius, tree.stickColor); // White stick
     DrawCubeWires(stickPosition, tree.stickRadius, tree.stickHeight, tree.stickRadius, GRAY);       // Gray edges
 
-    // Draw the lollipop head (outer layer)
+    // Draw the lollipop head
     Vector3 headPosition = { tree.position.x, tree.position.y - 0.5 * tree.headRadius + tree.stickHeight + tree.headRadius, tree.position.z };
     DrawSphere(headPosition, tree.headRadius, tree.headColor);
+
+    // Draw the lollipop ring
+    float ringRadius = tree.headRadius * 0.8f;  // Slightly smaller than the head radius
+    float ringHeight = 0.1f;                    // Thickness of the ring
+    Vector3 ringPosition = { tree.position.x, tree.position.y + tree.stickHeight + tree.headRadius / 2, tree.position.z };
+    DrawCylinder(ringPosition, ringRadius, ringRadius, ringHeight, 16, tree.headColor); // Ring matches head color
 }
 
 // Function to draw multiple lollipop trees
@@ -35,7 +41,7 @@ static inline void DrawLollipopTrees(LollipopTree *trees, int treeCount) {
 
 // Function to generate random lollipop trees on the board
 static inline void GenerateRandomLollipopTrees(LollipopTree *trees, int treeCount, float boardSize, float squareSize) {
-    unsigned int seed = 7890;    // Default seed for consistency
+    unsigned int seed = 69;    // Default seed for consistency
     unsigned char alpha = 150;  // Default transparency value
 
     srand(seed); // Set the seed for reproducibility
@@ -56,6 +62,5 @@ static inline void GenerateRandomLollipopTrees(LollipopTree *trees, int treeCoun
         };
     }
 }
-
 
 #endif // DRAW_TREE_H
