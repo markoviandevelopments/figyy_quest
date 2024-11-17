@@ -56,7 +56,7 @@ void DrawPrestonhouse() {
                     0.0f + 3 * r_f * r_f_2 * cos(a)
                 };
                 // Draw
-                if (12 - 200 * pow((a - 2) * (a - 2), 1.2) - 5 * y < 0) {
+                if (12 - 200 * pow((a - 5) * (a - 5), 1.2) - 5 * y < 0) {
                     DrawCube(position, block_w, 0.05f, block_w, squareColor); // Thin height for a flat square
                     //DrawCubeWires(position, block_w, 0.05f, block_w, BLACK);  // Outline
                 }
@@ -67,20 +67,34 @@ void DrawPrestonhouse() {
     static Model model = { 0 };
     static bool isModelLoaded = false;
     if (!isModelLoaded) {
-        model = LoadModel("model.obj"); // Replace with your model path
-        Texture2D texture = LoadTexture("texture.png"); // Replace with your texture path
+        model = LoadModel("model.obj"); // Load the model
+        Texture2D texture = LoadTexture("texture.png"); // Load the texture
+
+        // Attach the texture to the material
         model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
+
+        // Set texture scaling using a shader value
+        Shader shader = LoadShader(NULL, "resources/scaling.fs"); // Load a fragment shader for scaling
+        model.materials[0].shader = shader;
+
+        // Pass texture scaling factor to the shader
+        float textureScale = 1.0f; // Scale down the texture
+        SetShaderValue(shader, GetShaderLocation(shader, "textureScale"), &textureScale, SHADER_UNIFORM_FLOAT);
         isModelLoaded = true;
     }
 
     // Draw the loaded model
-    Vector3 modelPosition = { 10.1f, 3.1f, 0.0f }; // Adjust position as needed
-    Vector3 modelScale = { 0.06f, 0.06f, 0.06f };    // Scale factor (1/5 = 0.2)
-    Vector3 rotationAxis = { 0.0f, 1.0f, 0.0f };   // Rotation around Y-axis
-    float rotationAngle = GetTime() * 30.0f;       // Rotate over time (30 degrees per second)
+    Vector3 modelPosition = { 10.4f - fabs(10.0f * sin(GetTime() * 0.16f)), 0.2f, 0.0f  + fabs(2.8f * sin(GetTime() * 0.16f))}; // Adjust position as needed
+    Vector3 modelScale = { 0.03f, 0.03f, 0.03f };    // Scale factor (1/5 = 0.2)
 
-    // Draw the model with rotation and scaling
-    DrawModelEx(model, modelPosition, rotationAxis, rotationAngle, modelScale, WHITE);
+    // Combine the two rotations into one axis and angle
+    Vector3 combinedAxis = { 0.0f, 0.1f, 0.1f};
+    float combinedAngle =  -180.0f; // Rotate dynamically over time
+
+    // Draw the model using the combined axis and angle
+    DrawModelEx(model, modelPosition, combinedAxis, combinedAngle, modelScale, WHITE);
+
+
 
     static Model model2 = { 0 };
     static bool isModel2Loaded = false;
@@ -92,17 +106,17 @@ void DrawPrestonhouse() {
         model2.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture2;
 
         // Set texture scaling using a shader value
-        Shader shader = LoadShader(NULL, "resources/scaling.fs"); // Load a fragment shader for scaling
+        Shader shader = LoadShader(NULL, "resources/scaling2.fs"); // Load a fragment shader for scaling
         model2.materials[0].shader = shader;
 
         // Pass texture scaling factor to the shader
-        float textureScale = 0.02f; // Scale down the texture
-        SetShaderValue(shader, GetShaderLocation(shader, "textureScale"), &textureScale, SHADER_UNIFORM_FLOAT);
+        float textureScale2 = 0.02f; // Scale down the texture
+        SetShaderValue(shader, GetShaderLocation(shader, "textureScale"), &textureScale2, SHADER_UNIFORM_FLOAT);
         isModel2Loaded = true;
     }
 
     // Draw the loaded model
-    Vector3 modelPosition2 = { 8.7f, 0.8f, 0.0f }; // Adjust position as needed
+    Vector3 modelPosition2 = { 11.1f, 0.8f, 0.0f }; // Adjust position as needed
     Vector3 modelScale2 = { 0.01f, 0.01f, 0.01f };    // Scale factor (1/5 = 0.2)
     Vector3 rotationAxis2 = { 0.0f, 0.5f, 0.5f };   // Rotation around Y-axis
     float rotationAngle2 =  sin(GetTime() * 0.5f * ( sin(GetTime() * 0.1f) + 1)) * 10.0f + 180.0f;       // Rotate over time (30 degrees per second)
