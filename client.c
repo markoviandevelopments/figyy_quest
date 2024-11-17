@@ -313,7 +313,7 @@ int main(void) {
             */
 
             // Draw other players as short rectangular prisms
-            switch (i % 5) {
+            switch (remotePlayers[i].id % 5) {
                 case 0:
                     playercolor = RED;
                 case 1:
