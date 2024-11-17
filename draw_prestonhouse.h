@@ -8,9 +8,7 @@
 #include <stdlib.h>
 
 
-void DrawPrestonhouse() {
-
-
+void DrawPrestonhouse(long double server_time) {
     float dist;
     int x_c = 0;
     int z_c = 1;
@@ -84,7 +82,7 @@ void DrawPrestonhouse() {
     }
 
     // Draw the loaded model
-    Vector3 modelPosition = { 10.4f - fabs(10.0f * sin(GetTime() * 0.16f)), 0.2f, 0.0f  + fabs(2.8f * sin(GetTime() * 0.16f))}; // Adjust position as needed
+    Vector3 modelPosition = { 10.4f - fabs(10.0f * sin(server_time * 0.06f)), 0.2f, 0.0f  + fabs(2.8f * sin(server_time * 0.06f))}; // Adjust position as needed
     Vector3 modelScale = { 0.03f, 0.03f, 0.03f };    // Scale factor (1/5 = 0.2)
 
     // Combine the two rotations into one axis and angle

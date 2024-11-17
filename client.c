@@ -54,6 +54,8 @@ LollipopTree lollipopTrees[TREE_COUNT];
 int client_socket;
 int my_id; // Store our assigned player ID
 
+long double server_time;
+
 void *receive_updates(void *arg) {
     char buffer[BUFFER_SIZE];
     char recv_buffer[BUFFER_SIZE];
@@ -80,10 +82,12 @@ void *receive_updates(void *arg) {
             // Process the line
             int id;
             float x, y, z;
-            if (sscanf(line_start, "%d %f %f %f", &id, &x, &y, &z) == 4) {
+            long double t;
+            if (sscanf(line_start, "%d %f %f %f %Lf", &id, &x, &y, &z, &t) == 5) {
                 pthread_mutex_lock(&players_mutex);
                 // Update the remotePlayers array
                 int found = 0;
+                server_time = t;
                 for (int i = 0; i < remotePlayerCount; i++) {
                     if (remotePlayers[i].id == id) {
                         remotePlayers[i].position.x = x;
@@ -120,7 +124,7 @@ void *receive_updates(void *arg) {
 int main(void) {
 
     float total_time = 0;
-
+    server_time = 0.0L;
     // Initialize the player
     Player player = { .position = { 0.0f, PLAYER_CAMERA_HEIGHT, 10.0f }, .velocityY = 0.0f, .isGrounded = false, .yaw = 0.0f, .pitch = 0.0f };
 
@@ -268,7 +272,7 @@ int main(void) {
         DrawPyramid();
         // Draw the lollipop trees
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-        DrawPrestonhouse();
+        DrawPrestonhouse(server_time);
 
 
         // Draw other players
@@ -294,6 +298,7 @@ int main(void) {
         DrawText("Press [ESC] to exit", 10, 40, 20, RED);
         char buffer_text[500];
         sprintf(buffer_text, "X: %f   Y: %f   Z: %f   Time: %f", player.position.x, player.position.y, player.position.z, total_time);
+        sprintf(buffer_text, "Server Time: %Lf", server_time);
         DrawText(buffer_text, 10, 70, 20, RED);
 
         EndDrawing();

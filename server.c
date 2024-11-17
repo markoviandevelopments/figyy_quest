@@ -24,26 +24,41 @@ typedef struct {
     Player player;
 } Client;
 
+
+float get_current_time() {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts); // Get current time in seconds and nanoseconds
+
+    // Convert seconds and nanoseconds to a float
+    return (long double)ts.tv_sec + (long double)ts.tv_nsec / 1e9L;
+}
+
+
+long double time_ref;
+long double elapsed_time;
+
 // Change clients array to store pointers
 Client *clients[MAX_CLIENTS];
 int client_count = 0;
 pthread_mutex_t clients_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 // Function to broadcast positions to all clients
-void broadcast_positions() {
+void broadcast_info() {
     char buffer[BUFFER_SIZE];
     int offset = 0;
 
     pthread_mutex_lock(&clients_mutex);
 
-    // Serialize all player positions
+    elapsed_time = get_current_time() - time_ref;
+
+    // Serialize all information
     for (int i = 0; i < client_count; i++) {
-        offset += snprintf(buffer + offset, BUFFER_SIZE - offset, "%d %f %f %f\n",
-                           clients[i]->player.id, clients[i]->player.x, clients[i]->player.y, clients[i]->player.z);
+        offset += snprintf(buffer + offset, BUFFER_SIZE - offset, "%d %f %f %f %Lf\n",
+                           clients[i]->player.id, clients[i]->player.x, clients[i]->player.y, clients[i]->player.z, elapsed_time);
     }
 
     // Debugging: Print the data being sent to clients
-    //printf("Broadcasting to clients:\n%s\n", buffer);
+    printf("Broadcasting to clients:\n%s\n", buffer);
 
     // Send the serialized positions to all connected clients
     for (int i = 0; i < client_count; i++) {
@@ -61,7 +76,7 @@ void *broadcast_thread(void *arg) {
         req.tv_nsec = BROADCAST_INTERVAL; // In nanoseconds
 
         nanosleep(&req, NULL);
-        broadcast_positions();
+        broadcast_info();
     }
     return NULL;
 }
@@ -133,6 +148,9 @@ int main() {
     int server_socket, new_socket;
     struct sockaddr_in server_address, client_address;
     socklen_t addr_len = sizeof(client_address);
+    time_ref = get_current_time();
+    printf("Server started at epoch time: %.12Lf\n", time_ref);
+    elapsed_time = 0;
 
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket == -1) {
