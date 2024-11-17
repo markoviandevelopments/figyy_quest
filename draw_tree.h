@@ -44,6 +44,8 @@ static inline void GenerateRandomLollipopTrees(LollipopTree *trees, int treeCoun
     unsigned int seed = 69;    // Default seed for consistency
     unsigned char alpha = 150;  // Default transparency value
 
+
+
     srand(seed); // Set the seed for reproducibility
 
     for (int i = 0; i < treeCount; i++) {
