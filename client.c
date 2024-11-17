@@ -242,7 +242,7 @@ int main(void) {
         player.position.z += moveDirection.z;
 
         // Jumping
-        if (IsKeyPressed(KEY_SPACE) && player.isGrounded || player.position.x > 31) {
+        if ((IsKeyPressed(KEY_SPACE) && player.isGrounded) || player.position.x > 31) {
             player.velocityY = JUMP_FORCE;
             player.isGrounded = false;
         }
@@ -289,6 +289,17 @@ int main(void) {
             PlaySound(sound2);
         }
 
+        if (IsKeyPressed(KEY_P)) {
+            time_t current_time = time(NULL);
+            char time_str[30];
+            snprintf(time_str, sizeof(time_str), "%ld", current_time - 1466112000);
+            char filename_string[40];
+            strcpy(filename_string, "screenshot_");
+            strcat(filename_string, time_str);
+            strcat(filename_string, ".png");
+            TakeScreenshot(filename_string);
+        }
+
         // Send position to server
         char buffer[BUFFER_SIZE];
         snprintf(buffer, BUFFER_SIZE, "%f %f %f\n", player.position.x, player.position.y, player.position.z);
@@ -306,8 +317,8 @@ int main(void) {
         DrawChessboard(BOARD_SIZE, SQUARE_SIZE);
         DrawPyramid();
         // Draw the lollipop trees
+        cat = DrawPrestonhouse(server_time);
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-        cat = DrawPrestonhouse(server_time, &camera);
 
 
         // Draw other players

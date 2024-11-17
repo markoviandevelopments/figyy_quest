@@ -15,7 +15,7 @@ typedef struct {
 } Cat;
 
 
-Cat DrawPrestonhouse(long double server_time, Camera3D *camera) {
+Cat DrawPrestonhouse(long double server_time) {
     float dist;
     Cat cat;
     int x_c = 0;
