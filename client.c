@@ -316,14 +316,19 @@ int main(void) {
             switch (remotePlayers[i].id % 5) {
                 case 0:
                     playercolor = RED;
+                    break;
                 case 1:
                     playercolor = BLUE;
+                    break;
                 case 2:
                     playercolor = LIME;
+                    break;
                 case 3:
                     playercolor = MAGENTA;
+                    break;
                 case 4:
                     playercolor = (Color) {255, 255, 0, 100};
+                    break;
             }
             Vector3 otherPlayerPosition = remotePlayers[i].position;
             DrawCube((Vector3){otherPlayerPosition.x, otherPlayerPosition.y - 1.6f, otherPlayerPosition.z}, 0.9f, PLAYER_HEIGHT, 0.9f, playercolor);
