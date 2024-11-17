@@ -134,6 +134,38 @@ Cat DrawPrestonhouse(long double server_time) {
     // Draw the model with rotation and scaling
     DrawModelEx(model2, modelPosition2, rotationAxis2, rotationAngle2, modelScale2, WHITE);
 
+
+
+    static Model model3 = { 0 };
+    static bool isModel3Loaded = false;
+    if (!isModel3Loaded) {
+        model3 = LoadModel("model_3.obj"); // Load the model
+        Texture2D texture3 = LoadTexture("texture_3.png"); // Load the texture
+
+        // Attach the texture to the material
+        model3.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture3;
+
+        // Set texture scaling using a shader value
+        Shader shader3 = LoadShader(NULL, "resources/scaling2.fs"); // Load a fragment shader for scaling
+        model3.materials[0].shader = shader3;
+
+        // Pass texture scaling factor to the shader
+        float textureScale3 = 0.02f; // Scale down the texture
+        SetShaderValue(shader3, GetShaderLocation(shader3, "textureScale"), &textureScale3, SHADER_UNIFORM_FLOAT);
+        isModel3Loaded = true;
+    }
+
+    // Draw the loaded model
+    Vector3 modelPosition3 = { 60.0f * sin(server_time * 0.01f), 0.8f, 60.0f * sin(server_time * 0.0124f) }; // Adjust position as needed
+    Vector3 modelScale3 = { 0.01f, 0.01f, 0.01f };    // Scale factor (1/5 = 0.2)
+    Vector3 rotationAxis3 = { 0.0f, 0.5f, 0.5f };   // Rotation around Y-axis
+    float rotationAngle3 =  sin(GetTime() * 0.5f * ( sin(GetTime() * 0.1f) + 1)) * 10.0f + 180.0f;       // Rotate over>
+
+    // Draw the model with rotation and scaling
+    DrawModelEx(model3, modelPosition3, rotationAxis3, rotationAngle3, modelScale3, WHITE);
+
+
+
     return cat;
 
 }
