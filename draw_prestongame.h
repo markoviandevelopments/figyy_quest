@@ -17,7 +17,7 @@ void DrawPrestongame() {
        };
 
     // Draw the square as a cube
-    DrawCube(position, 0.2f, 0.2f, 0.2f, squareColor); // Thin height for a flat square
-    DrawCubeWires(position, 0.2f, 0.2f, 0.2f, BLACK);  // Outline
+    DrawCube(position, 0.2f, 0.2f + 1.0f + 1.0f * sin(GetTime()), 0.2f, squareColor); // Thin height for a flat square
+    DrawCubeWires(position, 0.2f, 0.2f + 1.0f + 1.0f * sin(GetTime()), 0.2f, BLACK);  // Outline
 
 }
