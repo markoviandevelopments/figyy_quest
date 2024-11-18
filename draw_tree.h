@@ -24,12 +24,14 @@ static inline void DrawLollipopTree(LollipopTree tree) {
     // Draw the lollipop head
     Vector3 headPosition = { tree.position.x, tree.position.y - 0.5 * tree.headRadius + tree.stickHeight + tree.headRadius, tree.position.z };
     DrawSphere(headPosition, tree.headRadius, tree.headColor);
+    DrawSphereWires(headPosition, tree.headRadius, 16, 16, GRAY);
 
     // Draw the lollipop ring
     float ringRadius = tree.headRadius * 1.1f;
     float ringHeight = 0.2f;
     Vector3 ringPosition = { tree.position.x, tree.position.y - 0.7 * tree.headRadius + tree.stickHeight + tree.headRadius, tree.position.z };
     DrawCylinder(ringPosition, ringRadius, ringRadius, ringHeight, 16, tree.headColor);
+    DrawCylinderWires(ringPosition, ringRadius, ringRadius, ringHeight, 16, GRAY);
 }
 
 
