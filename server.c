@@ -58,7 +58,7 @@ void broadcast_info() {
     }
 
     // Debugging: Print the data being sent to clients
-    printf("Broadcasting to clients:\n%s\n", buffer);
+    //printf("Broadcasting to clients:\n%s\n", buffer);
 
     // Send the serialized positions to all connected clients
     for (int i = 0; i < client_count; i++) {
