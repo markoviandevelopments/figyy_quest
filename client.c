@@ -326,7 +326,7 @@ int main(void) {
         // Draw the lollipop trees
         cat = DrawPrestonhouse(server_time);
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-        DrawPrestongame();
+        DrawPrestongame(remotePlayers);
         DrawWillohgame();
 
         // Draw other players
