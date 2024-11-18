@@ -16,7 +16,7 @@ void DrawWillohgame() {
     Color squareColor = PINK;
     Vector3 position = {
        14.0f,
-       10.9f,
+       1.9f,
        13.0f
        };
 
@@ -26,3 +26,4 @@ void DrawWillohgame() {
     DrawCubeWires(position, x_pos, y_pos, z_pos, BLACK);  // Outline
 
 }
+
