@@ -23,8 +23,8 @@ void DrawPrestongame(RemotePlayerIn players[10]) {
     for (int i=0;i < 10; i++) {
         float x=players[i].position.x;
         float z=players[i].position.z;
-        float dist = pow(pow(x, 2) + pow(z, 2), 0.5f);
-        if (dist < 4.0f){
+        float dist = pow(pow(x - 13, 2) + pow(z - 13, 2), 0.5f);
+        if (dist < 2.0f){
             squareColor = GREEN;
         }
     }
