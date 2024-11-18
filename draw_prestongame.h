@@ -9,7 +9,7 @@
 
 
 void DrawPrestongame() {
-    Color squareColor = LIGHTGRAY;
+    Color squareColor = RED;
     Vector3 position = {
        13.0f,
        0.9f,

@@ -9,7 +9,7 @@
 
 
 void DrawWillohgame() {
-    Color squareColor = LIGHTGRAY;
+    Color squareColor = PINK;
     Vector3 position = {
        14.0f,
        0.9f,
