@@ -26,10 +26,10 @@ static inline void DrawLollipopTree(LollipopTree tree) {
     DrawSphere(headPosition, tree.headRadius, tree.headColor);
 
     // Draw the lollipop ring
-    float ringRadius = tree.headRadius * 1.1f;  // Slightly smaller than the head radius
-    float ringHeight = 0.1f;                    // Thickness of the ring
-    Vector3 ringPosition = { tree.position.x, tree.position.y + tree.stickHeight + tree.headRadius / 2, tree.position.z };
-    DrawCylinder(ringPosition, ringRadius, ringRadius, ringHeight, 16, tree.headColor); // Ring matches head color
+    float ringRadius = tree.headRadius * 1.1f;
+    float ringHeight = 0.2f;
+    Vector3 ringPosition = { tree.position.x, tree.position.y - 0.5 * tree.headRadius + tree.stickHeight + tree.headRadius, tree.position.z };
+    DrawCylinder(ringPosition, ringRadius, ringRadius, ringHeight, 16, tree.headColor);
 }
 
 // Function to draw multiple lollipop trees
