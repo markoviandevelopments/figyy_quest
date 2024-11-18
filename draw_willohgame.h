@@ -10,13 +10,13 @@
 
 void DrawWillohgame() {
     float x_pos = 0.2f;
-    float y_pos = 1.2f;
-    float z_pos = 1.2f;
+    float y_pos = 0.2f;
+    float z_pos = 0.2f;
 
     Color squareColor = PINK;
     Vector3 position = {
        14.0f,
-       20.9f,
+       10.9f,
        13.0f
        };
 
