@@ -9,6 +9,10 @@
 
 
 void DrawWillohgame() {
+    float x_pos = 0.2f;
+    float y_pos = 1.2f;
+    float z_pos = 0.2f;
+
     Color squareColor = PINK;
     Vector3 position = {
        14.0f,
@@ -17,7 +21,7 @@ void DrawWillohgame() {
        };
 
     // Draw the square as a cube
-    DrawCube(position, 0.2f, 0.2f, 0.2f, squareColor); // Thin height for a flat square
-    DrawCubeWires(position, 0.2f, 0.2f, 0.2f, BLACK);  // Outline
+    DrawCube(position, x_pos, y_pos, z_pos, squareColor); // Thin height for a flat square
+    DrawCubeWires(position, x_pos, y_pos, z_pos, BLACK);  // Outline
 
 }
