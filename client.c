@@ -15,6 +15,8 @@
 #include "draw_chessboard.h"
 #include "draw_pyramid.h"
 #include "draw_prestonhouse.h"
+#include "draw_prestongame.h"
+#include "draw_willohgame.h"
 
 
 #define BOARD_SIZE 32       // Number of squares per row and column
@@ -31,7 +33,7 @@
 #define TREE_COUNT 142
 
 // Set the server IP address here
-#define SERVER_IP "10.1.10.79"
+#define SERVER_IP "50.188.120.138"
 
 typedef struct {
     Vector3 position;  // Player position
@@ -324,7 +326,8 @@ int main(void) {
         // Draw the lollipop trees
         cat = DrawPrestonhouse(server_time);
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-
+        DrawPrestongame();
+        DrawWillohgame();
 
         // Draw other players
         pthread_mutex_lock(&players_mutex);
