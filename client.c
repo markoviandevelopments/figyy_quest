@@ -100,7 +100,7 @@ void *receive_updates(void *args) {
             int id;
             float x, y, z;
             long double t;
-            if (sscanf(line_start, "%d %f %f %f %Lf %d %d %f", &id, &x, &y, &z, &t, &type_fserv, &state_fserv, &information_fserv) == 5) {
+            if (sscanf(line_start, "%d %f %f %f %Lf %d %d %f", &id, &x, &y, &z, &t, &type_fserv, &state_fserv, &information_fserv) == 8) {
                 pthread_mutex_lock(&players_mutex);
                 // Update the remotePlayers array
                 int found = 0;
