@@ -37,6 +37,21 @@ float get_current_time() {
 long double time_ref;
 long double elapsed_time;
 
+
+
+// From client
+int type_fclient = -1;
+int state_fclient = -1;
+float information_fclient = -1.00f;
+
+
+// To client (Willoh shoutout)
+int type;
+int state;
+float information;
+
+
+
 // Change clients array to store pointers
 Client *clients[MAX_CLIENTS];
 int client_count = 0;
@@ -53,12 +68,13 @@ void broadcast_info() {
 
     // Serialize all information
     for (int i = 0; i < client_count; i++) {
-        offset += snprintf(buffer + offset, BUFFER_SIZE - offset, "%d %f %f %f %Lf\n",
-                           clients[i]->player.id, clients[i]->player.x, clients[i]->player.y, clients[i]->player.z, elapsed_time);
+        offset += snprintf(buffer + offset, BUFFER_SIZE - offset, "%d %f %f %f %Lf %d %d %f\n",
+                           clients[i]->player.id, clients[i]->player.x, clients[i]->player.y, clients[i]->player.z, elapsed_time,
+                           type_fclient, state_fclient, information_fclient);
     }
 
     // Debugging: Print the data being sent to clients
-    //printf("Broadcasting to clients:\n%s\n", buffer);
+    printf("Broadcasting to clients:\n%s\n", buffer);
 
     // Send the serialized positions to all connected clients
     for (int i = 0; i < client_count; i++) {
@@ -99,6 +115,9 @@ void *handle_client(void *arg) {
         recv_buffer_len += bytes_read;
         recv_buffer[recv_buffer_len] = '\0';
 
+
+        printf("Recieved from client:\n%s\n", buffer);
+
         // Process complete lines
         char *line_start = recv_buffer;
         char *newline_ptr = NULL;
@@ -106,8 +125,9 @@ void *handle_client(void *arg) {
             *newline_ptr = '\0';
 
             // Process the line
+            int id;
             float x, y, z;
-            if (sscanf(line_start, "%f %f %f", &x, &y, &z) == 3) {
+            if (sscanf(line_start, "%d %f %f %f %d %d %f", &id, &x, &y, &z, &type, &state, &information) == 7) {
                 pthread_mutex_lock(&clients_mutex);
                 client->player.x = x;
                 client->player.y = y;

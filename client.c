@@ -58,6 +58,20 @@ LollipopTree lollipopTrees[TREE_COUNT];
 int client_socket;
 int my_id; // Store our assigned player ID
 
+
+// Client to server
+int type = -1;
+int state = -1;
+float information = -1.00f;
+
+// From server to client
+int type_fserv = -1;
+int state_fserv = -1;
+float information_fserv = -1.00f;
+
+
+
+
 long double server_time;
 
 void *receive_updates(void *args) {
@@ -86,7 +100,7 @@ void *receive_updates(void *args) {
             int id;
             float x, y, z;
             long double t;
-            if (sscanf(line_start, "%d %f %f %f %Lf", &id, &x, &y, &z, &t) == 5) {
+            if (sscanf(line_start, "%d %f %f %f %Lf %d %d %f", &id, &x, &y, &z, &t, &type_fserv, &state_fserv, &information_fserv) == 5) {
                 pthread_mutex_lock(&players_mutex);
                 // Update the remotePlayers array
                 int found = 0;
@@ -309,7 +323,7 @@ int main(void) {
 
         // Send position to server
         char buffer[BUFFER_SIZE];
-        snprintf(buffer, BUFFER_SIZE, "%f %f %f\n", player.position.x, player.position.y, player.position.z);
+        snprintf(buffer, BUFFER_SIZE, "%d %f %f %f %d %d %f\n", my_id, player.position.x, player.position.y, player.position.z, type, state, information);
         send(client_socket, buffer, strlen(buffer), 0);
 
         // Start drawing
