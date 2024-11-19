@@ -8,6 +8,11 @@
 #include <arpa/inet.h>
 #include <time.h>
 
+
+
+#include "alter_prestongame.h"
+
+
 #define PORT 12345
 #define MAX_CLIENTS 10
 #define BUFFER_SIZE 1024
@@ -39,18 +44,19 @@ long double elapsed_time;
 
 
 
-// From client
-int type_fclient = -1;
-int state_fclient = -1;
-float information_fclient = -1.00f;
+// To client
+int type_tclient = -1;
+int state_tclient = -1;
+float information_tclient = -1.00f;
 
 
-// To client (Willoh shoutout)
+// From client (Willoh shoutout)
 int type;
 int state;
 float information;
 
-
+// Memory List
+float memory_list[10] = {-1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f};
 
 // Change clients array to store pointers
 Client *clients[MAX_CLIENTS];
@@ -66,11 +72,26 @@ void broadcast_info() {
 
     elapsed_time = get_current_time() - time_ref;
 
+
+
+    // SECTION FOR HANDLING THE STATE OF OBJECTS AND THE BROADCASTING OF STATE INFORMATION TO CLIENTS
+
+    int r = rand() % 1;
+    if (r == 0 && memory_list[0] > 0.0f) {  // TO HANDLE alter_prestongame.h
+        type_tclient = 0;
+        state_tclient = 0;
+        information_tclient = 1.0f;
+    }
+
+
+
+
+
     // Serialize all information
     for (int i = 0; i < client_count; i++) {
         offset += snprintf(buffer + offset, BUFFER_SIZE - offset, "%d %f %f %f %Lf %d %d %f\n",
                            clients[i]->player.id, clients[i]->player.x, clients[i]->player.y, clients[i]->player.z, elapsed_time,
-                           type_fclient, state_fclient, information_fclient);
+                           type_tclient, state_tclient, information_tclient);
     }
 
     // Debugging: Print the data being sent to clients
@@ -132,6 +153,11 @@ void *handle_client(void *arg) {
                 client->player.x = x;
                 client->player.y = y;
                 client->player.z = z;
+
+                if (type == 0) {  // Handle alter_prestongame.h
+                    AlterPrestongame(type, state, information, memory_list);
+                }
+
                 pthread_mutex_unlock(&clients_mutex);
             }
 

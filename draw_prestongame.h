@@ -16,16 +16,19 @@ typedef struct {
 } RemotePlayerIn;
 
 
-void DrawPrestongame(RemotePlayerIn players[10]) {
+int DrawPrestongame(RemotePlayerIn players[10], int type_in, int state_in, float information_in) {
 
     Color squareColor = RED;
+
+    int return_value = -1;
 
     for (int i=0;i < 10; i++) {
         float x=players[i].position.x;
         float z=players[i].position.z;
         float dist = pow(pow(x - 13, 2) + pow(z - 13, 2), 0.5f);
-        if (dist < 2.0f){
+        if (dist < 2.0f || information_in > 0.0f){
             squareColor = GREEN;
+            return_value = 0;
         }
     }
 
@@ -38,5 +41,9 @@ void DrawPrestongame(RemotePlayerIn players[10]) {
     // Draw the square as a cube
     DrawCube(position, 0.2f, 0.2f + 1.0f + 1.0f * sin(3.14f * sin(GetTime())), 0.2f, squareColor); // Thin height for a flat square
     DrawCubeWires(position, 0.2f, 0.2f + 1.0f + 1.0f * sin(3.14f * sin(GetTime())), 0.2f, BLACK);  // Outline
+
+
+    return return_value;
+
 
 }
