@@ -77,10 +77,18 @@ void broadcast_info() {
     // SECTION FOR HANDLING THE STATE OF OBJECTS AND THE BROADCASTING OF STATE INFORMATION TO CLIENTS
 
     int r = rand() % 1;
-    if (r == 0 && memory_list[0] > 0.0f) {  // TO HANDLE alter_prestongame.h
-        type_tclient = 0;
-        state_tclient = 0;
-        information_tclient = 1.0f;
+    if (r == 0) {
+        if (memory_list[0] <= -2.0f && memory_list[0] > -202.0f) {  // TO HANDLE alter_prestongame.h
+            memory_list[0] -= 1.0f;
+            type_tclient = 0;
+            state_tclient = 0;
+            information_tclient = (rand() % 1000 ) / 1000.0f * 5;
+        } else {
+            type_tclient = 0;
+            state_tclient = 0;
+            information_tclient = -1.0f;
+
+        }
     }
 
 

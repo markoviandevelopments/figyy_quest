@@ -69,7 +69,8 @@ int type_fserv = -1;
 int state_fserv = -1;
 float information_fserv = -1.00f;
 
-
+// Memory List
+float memory_list[10] = {-1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f};
 
 
 long double server_time;
@@ -122,6 +123,11 @@ void *receive_updates(void *args) {
                     remotePlayers[remotePlayerCount].position.z = z;
                     remotePlayerCount++;
                 }
+
+                if (type_fserv == 0) {
+                    memory_list[0] = 0.0f;
+                }
+
                 pthread_mutex_unlock(&players_mutex);
             }
 
@@ -342,7 +348,19 @@ int main(void) {
         // Draw the lollipop trees
         cat = DrawPrestonhouse(server_time);
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-        type = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv);
+        type = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list);
+
+
+        if (type == 0) {
+            if (memory_list[0] < -0.4f && memory_list[0] > -0.6f) { //player close
+                state = 0;
+                information = 1.0f;
+            } else if (memory_list[0] == -0.1f) {  // Player far
+                state = 0;
+                information = -1.0f;
+            }
+        }
+
         DrawWillohgame();
 
         // Draw other players
