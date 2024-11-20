@@ -222,7 +222,7 @@ int main(void) {
 
     SetTargetFPS(60);
 
-    GenerateRandomLollipopTrees(lollipopTrees, TREE_COUNT, BOARD_SIZE * SQUARE_SIZE, SQUARE_SIZE);
+    GenerateRandomLollipopTrees(lollipopTrees, TREE_COUNT, BOARD_SIZE * SQUARE_SIZE);
 
     while (!WindowShouldClose()) {
         // Get frame time
