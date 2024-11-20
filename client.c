@@ -342,13 +342,42 @@ int main(void) {
 
 
 
+        int type_temp = -1;    // Allows each function to have a shot to return its type
+        int r_send = rand() % 3;  // Decides which function will pass its message
+
         // Call all the external functions to draw shapes
         DrawChessboard(BOARD_SIZE, SQUARE_SIZE);
         DrawPyramid();
         // Draw the lollipop trees
         cat = DrawPrestonhouse(server_time);
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
-        type = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list);
+        type_temp = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list);
+        if (type_temp >= 0 && r_send == 0) {
+            type = type_temp;
+        }
+
+        type_temp = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list); //Replace with Preston's first two-way game
+        if (type_temp >= 0 && r_send == 1) {
+            type = type_temp;
+        }
+
+
+
+        type_temp = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list); //Replace with WIlloh's first two-way game
+        if (type_temp >= 0 && r_send == 2) {
+            type = type_temp;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
         if (type == 0) {
@@ -360,6 +389,33 @@ int main(void) {
                 information = -1.0f;
             }
         }
+
+
+
+        if (type == 1) {
+            if (memory_list[0] < -0.4f && memory_list[0] > -0.6f) { //player close
+                state = 0;
+                information = 1.0f;
+            } else if (memory_list[0] == -0.1f) {  // Player far
+                state = 0;
+                information = -1.0f;
+            }
+        }
+
+
+        if (type == 2) {
+            if (memory_list[0] < -0.4f && memory_list[0] > -0.6f) { //player close
+                state = 0;
+                information = 1.0f;
+            } else if (memory_list[0] == -0.1f) {  // Player far
+                state = 0;
+                information = -1.0f;
+            }
+        }
+
+
+
+
 
         DrawWillohgame();
 

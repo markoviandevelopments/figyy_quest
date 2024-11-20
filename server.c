@@ -76,7 +76,7 @@ void broadcast_info() {
 
     // SECTION FOR HANDLING THE STATE OF OBJECTS AND THE BROADCASTING OF STATE INFORMATION TO CLIENTS
 
-    int r = rand() % 1;
+    int r = rand() % 3;
     if (r == 0) {
         if (memory_list[0] <= -2.0f && memory_list[0] > -202.0f) {  // TO HANDLE alter_prestongame.h
             memory_list[0] -= 1.0f;
@@ -91,6 +91,35 @@ void broadcast_info() {
         }
     }
 
+
+
+    if (r == 1) {
+        if (memory_list[0] <= -2.0f && memory_list[0] > -202.0f) {  // For Preston's first two-way game
+            memory_list[0] -= 1.0f;
+            type_tclient = 0;
+            state_tclient = 0;
+            information_tclient = (rand() % 1000 ) / 1000.0f * 5;
+        } else {
+            type_tclient = 0;
+            state_tclient = 0;
+            information_tclient = -1.0f;
+
+        }
+    }
+
+    if (r == 2) {
+        if (memory_list[0] <= -2.0f && memory_list[0] > -202.0f) {  // For Willoh's first two-way game
+            memory_list[0] -= 1.0f;
+            type_tclient = 0;
+            state_tclient = 0;
+            information_tclient = (rand() % 1000 ) / 1000.0f * 5;
+        } else {
+            type_tclient = 0;
+            state_tclient = 0;
+            information_tclient = -1.0f;
+
+        }
+    }
 
 
 
@@ -165,6 +194,15 @@ void *handle_client(void *arg) {
                 if (type == 0) {  // Handle alter_prestongame.h
                     AlterPrestongame(type, state, information, memory_list);
                 }
+
+                if (type == 1) {  // Handle Preston's first two
+                    AlterPrestongame(type, state, information, memory_list);
+                }
+
+                if (type == 2) {  // Handle WIll
+                    AlterPrestongame(type, state, information, memory_list);
+                }
+
 
                 pthread_mutex_unlock(&clients_mutex);
             }
