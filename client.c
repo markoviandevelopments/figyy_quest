@@ -219,6 +219,7 @@ int main(void) {
     Sound meow3 = LoadSound("sounds/meow3.wav");
     Sound sound1 = LoadSound("sounds/sound1.wav");
     Sound sound2 = LoadSound("sounds/sound2.wav");
+    Sound coin_sound = LoadSound("sounds/coin.wav");
 
 
 
@@ -368,7 +369,7 @@ int main(void) {
             type = type_temp;
         }
 
-        type_temp = DrawEpicgame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list); //Replace with Preston's first two-way game
+        type_temp = DrawEpicgame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list, coin_sound); //Replace with Preston's first two-way game
         if (type_temp >= 0 && r_send == 1) {
             type = type_temp;
         }
@@ -485,6 +486,7 @@ int main(void) {
     UnloadSound(meow3);
     UnloadSound(sound1);
     UnloadSound(sound2);
+    UnloadSound(coin_sound);
     CloseAudioDevice();
 
     CloseWindow();

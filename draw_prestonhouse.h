@@ -219,7 +219,7 @@ Cat DrawPrestonhouse(long double server_time) {
             // GenMeshTangents(&model4.meshes[0]); // Not necessary for flat shading
         }
 
-        isModel4Loaded = true;
+        isModel5Loaded = true;
     }
 
     // Define model transformation parameters
