@@ -46,7 +46,7 @@ int DrawPrestongame(RemotePlayerIn players[10], int type_in, int state_in, float
 
 
     float y = 0;
-    if (information_in >= 0.0f && type_in == 1) {
+    if (information_in >= 0.0f && type_in == 0) {
         y = information_in;
     }
 

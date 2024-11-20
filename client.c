@@ -103,7 +103,7 @@ void *receive_updates(void *args) {
             int id;
             float x, y, z;
             long double t;
-            printf("Recieved from Server:\n%s\n", line_start);
+            printf("Recieved from Server:  %s\n", line_start);
             if (sscanf(line_start, "%d %f %f %f %Lf %d %d %f", &id, &x, &y, &z, &t, &type_fserv, &state_fserv, &information_fserv) == 8) {
                 pthread_mutex_lock(&players_mutex);
                 // Update the remotePlayers array
@@ -343,7 +343,7 @@ int main(void) {
         // Send position to server
         char buffer[BUFFER_SIZE];
         snprintf(buffer, BUFFER_SIZE, "%d %f %f %f %d %d %f\n", my_id, player.position.x, player.position.y, player.position.z, type, state, information);
-        printf("Broadcasting to Server:\n%s\n", buffer);
+        printf("Broadcasting to Server:  %s\n", buffer);
         send(client_socket, buffer, strlen(buffer), 0);
 
         // Start drawing

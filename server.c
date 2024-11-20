@@ -134,7 +134,7 @@ void broadcast_info() {
     }
 
     // Debugging: Print the data being sent to clients
-    printf("Broadcasting to clients:\n%s\n", buffer);
+    printf("Broadcasting to clients:  %s\n", buffer);
 
     // Send the serialized positions to all connected clients
     for (int i = 0; i < client_count; i++) {
@@ -176,7 +176,7 @@ void *handle_client(void *arg) {
         recv_buffer[recv_buffer_len] = '\0';
 
 
-        printf("Recieved from client:\n%s\n", buffer);
+        printf("Recieved from client:  %s\n", buffer);
 
         // Process complete lines
         char *line_start = recv_buffer;
