@@ -96,13 +96,13 @@ void broadcast_info() {
 
 
     if (r == 1) {
-        if (memory_list[0] <= -2.0f && memory_list[0] > -202.0f) {  // For Preston's first two-way game
-            memory_list[0] -= 1.0f;
-            type_tclient = 0;
+        if (memory_list[1] <= -2.0f && memory_list[1] > -202.0f) {  // For Preston's first two-way game
+            memory_list[1] -= 1.0f;
+            type_tclient = 1;
             state_tclient = 0;
             information_tclient = (rand() % 1000 ) / 1000.0f * 5;
         } else {
-            type_tclient = 0;
+            type_tclient = 1;
             state_tclient = 0;
             information_tclient = -1.0f;
 
@@ -110,13 +110,13 @@ void broadcast_info() {
     }
 
     if (r == 2) {
-        if (memory_list[0] <= -2.0f && memory_list[0] > -202.0f) {  // For Willoh's first two-way game
-            memory_list[0] -= 1.0f;
-            type_tclient = 0;
+        if (memory_list[2] <= -2.0f && memory_list[2] > -202.0f) {  // For Willoh's first two-way game
+            memory_list[2] -= 1.0f;
+            type_tclient = 2;
             state_tclient = 0;
             information_tclient = (rand() % 1000 ) / 1000.0f * 5;
         } else {
-            type_tclient = 0;
+            type_tclient = 2;
             state_tclient = 0;
             information_tclient = -1.0f;
 
@@ -205,6 +205,7 @@ void *handle_client(void *arg) {
                     AlterPrestongame(type, state, information, memory_list);
                 }
 
+                printf("Memory:  %f  %f  %f  %f\n", memory_list[0], memory_list[1], memory_list[2], memory_list[3]);
 
                 pthread_mutex_unlock(&clients_mutex);
             }

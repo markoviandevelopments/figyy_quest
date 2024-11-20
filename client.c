@@ -130,6 +130,16 @@ void *receive_updates(void *args) {
                     memory_list[0] = 0.0f;
                 }
 
+                if (type_fserv == 1) {
+                    memory_list[1] = 0.0f;
+                }
+
+                if (type_fserv == 2) {
+                    memory_list[2] = 0.0f;
+                }
+
+
+
                 pthread_mutex_unlock(&players_mutex);
             }
 
@@ -372,7 +382,7 @@ int main(void) {
 
 
 
-
+        printf("Memory:  %f  %f  %f  %f\n", memory_list[0], memory_list[1], memory_list[2], memory_list[3]);
 
 
 
@@ -395,10 +405,10 @@ int main(void) {
 
 
         if (type == 1) {
-            if (memory_list[0] < -0.4f && memory_list[0] > -0.6f) { //player close
+            if (memory_list[1] < -0.4f && memory_list[1] > -0.6f) { //player close
                 state = 0;
                 information = 1.0f;
-            } else if (memory_list[0] == -0.1f) {  // Player far
+            } else if (memory_list[1] == -0.1f) {  // Player far
                 state = 0;
                 information = -1.0f;
             }
@@ -406,10 +416,10 @@ int main(void) {
 
 
         if (type == 2) {
-            if (memory_list[0] < -0.4f && memory_list[0] > -0.6f) { //player close
+            if (memory_list[2] < -0.4f && memory_list[2] > -0.6f) { //player close
                 state = 0;
                 information = 1.0f;
-            } else if (memory_list[0] == -0.1f) {  // Player far
+            } else if (memory_list[2] == -0.1f) {  // Player far
                 state = 0;
                 information = -1.0f;
             }

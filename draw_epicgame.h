@@ -31,22 +31,22 @@ int DrawEpicgame(RemotePlayerIn2 players[10], int type_in, int state_in, float i
         if (dist < 2.0f){
             squareColor = GREEN;
             anyone_in = 1;
-            return_value = 0;
+            return_value = 1;
 
         } else {
-            return_value = 0;
-            memory_list[0] = -0.1f;
+            return_value = 1;
+            memory_list[1] = -0.1f;
         }
 
     }
 
     if (anyone_in == 1) {
-        memory_list[0] = -0.5f;
+        memory_list[1] = -0.5f;
     }
 
 
     float y = 0;
-    if (information_in >= 0.0f) {
+    if (information_in >= 0.0f && type_in == 1) {
         y = information_in;
     }
 
