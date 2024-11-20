@@ -122,7 +122,7 @@ int DrawEpicgame(RemotePlayerIn2 players[10], int type_in, int state_in, float i
     if (anyone_in == 1 || ( type_in == 1 && information_in >= 0)) {
         rotationAngle5 = 180.0f * sin(GetTime() * 3.5f);
         modelPosition5 = (Vector3) { -29.0f, 1.5f + pow(sin(GetTime() * 3.5f), 2), 29.6f };
-        int r = rand() % 100;
+        int r = rand() % 10;
         if (r == 0 && player_is_closest) {
             PlaySound(coin_sound_in);
             (*score)++;
