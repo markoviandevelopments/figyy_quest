@@ -14,8 +14,17 @@ typedef struct {
     Color headColor;  // Color for the lollipop head and ring
 } LollipopTree;
 
+extern const Color LOLLIPOP_COLOR_LIST[];
+extern const int LOLLIPOP_COLOR_COUNT;
+
+
 // Function to draw a single lollipop tree
 static inline void DrawLollipopTree(LollipopTree tree) {
+
+    unsigned int seed = 69;
+    srand(seed);
+
+
     // Draw the lollipop stick
     Vector3 stickPosition = { tree.position.x, tree.position.y + tree.stickHeight / 2, tree.position.z };
     DrawCube(stickPosition, tree.stickRadius, tree.stickHeight, tree.stickRadius, tree.stickColor); // White stick
@@ -24,12 +33,12 @@ static inline void DrawLollipopTree(LollipopTree tree) {
     // Draw the lollipop head
     Vector3 headPosition = { tree.position.x, tree.position.y + tree.stickHeight + tree.headRadius, tree.position.z };
     DrawSphere(headPosition, tree.headRadius, tree.headColor);
-    DrawSphereWires(headPosition, tree.headRadius, 16, 16, GRAY);
+    DrawSphereWires(headPosition, tree.headRadius, 8, 16, GRAY);
 
     // Draw the lollipop ring
     float ringRadius = tree.headRadius * 1.1f;
     float ringHeight = 0.2f;
-    Vector3 ringPosition = { tree.position.x, tree.position.y + tree.stickHeight + tree.headRadius, tree.position.z };
+    Vector3 ringPosition = { tree.position.x, tree.position.y + tree.stickHeight + tree.headRadius - 0.1f, tree.position.z };
     DrawCylinder(ringPosition, ringRadius, ringRadius, ringHeight, 16, tree.headColor);
     DrawCylinderWires(ringPosition, ringRadius, ringRadius, ringHeight, 16, GRAY);
 }
@@ -42,7 +51,7 @@ static inline void DrawLollipopTrees(LollipopTree *trees, int treeCount) {
 }
 
 // Custom list of lollipop colors with transparency (preconverted to raylib's Color format)
-static const Color LOLLIPOP_COLOR_LIST[] = {
+const Color LOLLIPOP_COLOR_LIST[] = {
     // Primary fruity flavors
     (Color){255, 0, 0, 150},     // Red - Cherry
     (Color){255, 69, 0, 150},    // Orange - Orange
@@ -60,9 +69,6 @@ static const Color LOLLIPOP_COLOR_LIST[] = {
     // Creamy and dessert flavors
     (Color){255, 222, 173, 150}, // Navajo White - Caramel
     (Color){210, 105, 30, 150},  // Chocolate - Root Beer
-    (Color){255, 239, 213, 150}, // Papaya Whip - Cotton Candy
-    (Color){255, 248, 220, 150}, // Cornsilk - Cream Soda
-    (Color){240, 230, 140, 150}, // Khaki - Banana Split
 
     // Exotic and fun mixes
     (Color){173, 216, 230, 150}, // Light Blue - Bubble Gum
@@ -70,18 +76,16 @@ static const Color LOLLIPOP_COLOR_LIST[] = {
     (Color){255, 99, 71, 150},   // Tomato - Tropical Punch
     (Color){255, 215, 0, 150},   // Gold - Pineapple
     (Color){160, 82, 45, 150},   // Sienna - Chocolate Fudge
-    (Color){255, 240, 245, 150}, // Lavender Blush - Vanilla Cream
 
     // Seasonal and limited edition
     (Color){0, 128, 128, 150},   // Teal - Wintergreen
     (Color){199, 21, 133, 150},  // Medium Violet Red - Raspberry Lemonade
-    (Color){255, 228, 225, 150}, // Misty Rose - Birthday Cake
     (Color){255, 192, 203, 150}, // Pink - Peppermint Swirl
     (Color){220, 20, 60, 150},   // Crimson - Pomegranate
 };
 
 
-static const int LOLLIPOP_COLOR_COUNT = sizeof(LOLLIPOP_COLOR_LIST) / sizeof(LOLLIPOP_COLOR_LIST[0]);
+const int LOLLIPOP_COLOR_COUNT = sizeof(LOLLIPOP_COLOR_LIST) / sizeof(LOLLIPOP_COLOR_LIST[0]);
 
 // Function to generate random lollipop trees on the board
 static inline void GenerateRandomLollipopTrees(LollipopTree *trees, int treeCount, float boardSize) {

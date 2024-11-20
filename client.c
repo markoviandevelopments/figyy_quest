@@ -56,6 +56,7 @@ int remotePlayerCount = 0;
 pthread_mutex_t players_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 LollipopTree lollipopTrees[TREE_COUNT];
+
 // Networking variables
 int client_socket;
 int my_id; // Store our assigned player ID
@@ -367,6 +368,9 @@ int main(void) {
         // Draw the lollipop trees
         cat = DrawPrestonhouse(server_time);
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
+
+        DrawWillohgame();
+
         type_temp = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list);
         if (type_temp >= 0 && r_send == 0) {
             type = type_temp;
