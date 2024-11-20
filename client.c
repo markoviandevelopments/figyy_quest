@@ -16,6 +16,8 @@
 #include "draw_pyramid.h"
 #include "draw_prestonhouse.h"
 #include "draw_prestongame.h"
+#include "draw_epicgame.h"
+
 #include "draw_willohgame.h"
 
 
@@ -356,7 +358,7 @@ int main(void) {
             type = type_temp;
         }
 
-        type_temp = DrawPrestongame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list); //Replace with Preston's first two-way game
+        type_temp = DrawEpicgame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list); //Replace with Preston's first two-way game
         if (type_temp >= 0 && r_send == 1) {
             type = type_temp;
         }

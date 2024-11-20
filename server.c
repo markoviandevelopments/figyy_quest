@@ -11,6 +11,8 @@
 
 
 #include "alter_prestongame.h"
+#include "alter_epicgame.h"
+
 
 
 #define PORT 12345
@@ -196,7 +198,7 @@ void *handle_client(void *arg) {
                 }
 
                 if (type == 1) {  // Handle Preston's first two
-                    AlterPrestongame(type, state, information, memory_list);
+                    AlterEpicgame(type, state, information, memory_list);
                 }
 
                 if (type == 2) {  // Handle WIll
