@@ -17,18 +17,35 @@ typedef struct {
 
 
 
-int DrawEpicgame(RemotePlayerIn2 players[10], int type_in, int state_in, float information_in, float memory_list[10], Sound coin_sound_in) {
+int DrawEpicgame(RemotePlayerIn2 players[10], int type_in, int state_in, float information_in, float memory_list[10], Sound coin_sound_in, float *score, int my_id) {
 
     //Color squareColor = RED;
 
     int return_value = -1;
     int anyone_in = 0;
+    int player_is_closest = 0;
+    float x;
+    float y;
+    float z;
+    float dist;
+    int player_idx;
+
+    float lowest_dist = 10000000;
+
 
     for (int i=0;i < 10; i++) {
-        float x=players[i].position.x;
-        float z=players[i].position.z;
-        float dist = pow(pow(x - (-1 * 29.0f), 2) + pow(z - 29.6f, 2), 0.5f);
-        if (dist < 2.0f){
+
+        if (players[i].id == my_id) {
+            player_idx = i;
+        }
+
+        x=players[i].position.x;
+        z=players[i].position.z;
+        dist = pow(pow(x - (-1 * 29.0f), 2) + pow(z - 29.6f, 2), 0.5f);
+        if (dist < lowest_dist) {
+            lowest_dist = dist;
+        }
+        if (dist < 4.0f){
             //squareColor = GREEN;
             anyone_in = 1;
             return_value = 1;
@@ -40,12 +57,26 @@ int DrawEpicgame(RemotePlayerIn2 players[10], int type_in, int state_in, float i
 
     }
 
+
+
+
+
+    x=players[player_idx].position.x;
+    z=players[player_idx].position.z;
+    dist = pow(pow(x - (-1 * 29.0f), 2) + pow(z - 29.6f, 2), 0.5f);
+    //printf("My ID: %d  idx %d dist %f lowest %f", my_id, player_idx, dist, lowest_dist);
+    if (dist == lowest_dist) {
+        player_is_closest = 1;
+    }
+
+
+
     if (anyone_in == 1) {
         memory_list[1] = -0.5f;
     }
 
 
-    float y = 0;
+    y = 0;
     if (information_in >= 0.0f && type_in == 1) {
         y = information_in;
     }
@@ -82,19 +113,22 @@ int DrawEpicgame(RemotePlayerIn2 players[10], int type_in, int state_in, float i
     }
 
     float rotationAngle5;
+    Vector3 modelPosition5;
 
     // Define model transformation parameters
-    Vector3 modelPosition5 = { -29.0f, 1.5f, 29.6f };
     Vector3 modelScale5 = { 0.015f, 0.015f, 0.015f };
     Vector3 rotationAxis5 = { 0.0f, 1.0f, 0.0f };
 
     if (anyone_in == 1 || ( type_in == 1 && information_in >= 0)) {
-        rotationAngle5 = 90.0f * sin(GetTime() * 7.0f);
+        rotationAngle5 = 180.0f * sin(GetTime() * 3.5f);
+        modelPosition5 = (Vector3) { -29.0f, 1.5f + pow(sin(GetTime() * 3.5f), 2), 29.6f };
         int r = rand() % 100;
-        if (r == 0) {
+        if (r == 0 && player_is_closest) {
             PlaySound(coin_sound_in);
+            (*score)++;
         }
     } else {
+        modelPosition5 = (Vector3) { -29.0f, 1.5f, 29.6f };
         rotationAngle5 = -90.0f;
     }
 

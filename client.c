@@ -74,6 +74,9 @@ float information_fserv = -1.00f;
 // Memory List
 float memory_list[10] = {-1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f};
 
+// Score
+float score = 0;
+
 
 long double server_time;
 
@@ -369,7 +372,7 @@ int main(void) {
             type = type_temp;
         }
 
-        type_temp = DrawEpicgame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list, coin_sound); //Replace with Preston's first two-way game
+        type_temp = DrawEpicgame(remotePlayers, type_fserv, state_fserv, information_fserv, memory_list, coin_sound, &score, my_id); //Replace with Preston's first two-way game
         if (type_temp >= 0 && r_send == 1) {
             type = type_temp;
         }
@@ -476,6 +479,9 @@ int main(void) {
         DrawText(buffer_text, 10, 70, 20, RED);
         sprintf(buffer_text, "Server Time: %Lf", server_time);
         DrawText(buffer_text, 10, 100, 20, RED);
+        sprintf(buffer_text, "Score: %f", score);
+        DrawText(buffer_text, 10, 130, 20, RED);
+
 
         EndDrawing();
     }
