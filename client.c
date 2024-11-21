@@ -504,7 +504,7 @@ int main(void) {
         DrawText(buffer_text, 10, 70, 20, RED);
         sprintf(buffer_text, "Server Time: %Lf", server_time);
         DrawText(buffer_text, 10, 100, 20, RED);
-        sprintf(buffer_text, "Score: %f", score);
+        sprintf(buffer_text, "Score: %f  %f %f %f %f", score, memory_list[4], memory_list[5], memory_list[6], memory_list[7]);
         DrawText(buffer_text, 10, 130, 20, RED);
 
 

@@ -22,16 +22,6 @@ void AlterBouncer(float memory_list[10]) {
         memory_list[7] = 0.002f;
     }
 
-    /*
-    if (rand(iteration) % 2 == 0) {
-        *state = 0;
-        *information = memory_list[4];
-    } else {
-        *state = 1;
-        *information = memory_list[5];
-    }
-
-    */
 
     memory_list[4] += memory_list[6];
     memory_list[5] += memory_list[7];

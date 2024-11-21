@@ -42,9 +42,17 @@ int DrawBouncer(int type_in, int state_in, float information_in, float memory_li
        memory_list[5]
     };
 
+    Vector3 position2 = {
+       memory_list[4] + memory_list[6] * 100.0f,
+       -0.6f,
+       memory_list[5] + memory_list[7] * 100.0f
+    };
+
     // Draw the square as a cube
     DrawCube(position, 0.2f, 0.2f, 0.2f, (Color) {255, 0, 0, 255}); // Thin height for a flat square
     DrawCubeWires(position, 0.2f, 0.2f, 0.2f, BLACK);  // Outline
+    DrawCube(position2, 0.05f, 0.05f, 0.05f, (Color) {255, 0, 0, 255}); // Thin height for a flat square
+    DrawCubeWires(position2, 0.05f, 0.05f, 0.05f, BLACK);  // Outline
 
 
 

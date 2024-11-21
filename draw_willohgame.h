@@ -16,6 +16,8 @@ float blockPosition_x;
 float blockPosition_y;
 float blockPosition_z;
 
+int activated = 0;
+
 void DrawWillohgame() {
 
     Color cubeColor;
@@ -27,6 +29,7 @@ void DrawWillohgame() {
                 blockPosition.y = 1.4f + (rand() % 10) * 0.1f;
                 blockPosition.z = (rand() % 32) * 1.0f - (16) * 1.0f;
                 blockColor = LOLLIPOP_COLOR_LIST[rand() % LOLLIPOP_COLOR_COUNT];
+                activated = 1;
         }
 
     }
@@ -41,8 +44,10 @@ void DrawWillohgame() {
     Vector3 blockPosition = (Vector3) {blockPosition.x, blockPosition.y, blockPosition.z};
 
     // Draw the square as a cube
-    DrawCube(blockPosition, 0.2f, 0.2f, 0.2f, blockColor);
-    DrawCubeWires(blockPosition, 0.2f, 0.2f, 0.2f, DARKGRAY);
+    if (activated) {
+        DrawCube(blockPosition, 0.2f, 0.2f, 0.2f, blockColor);
+        DrawCubeWires(blockPosition, 0.2f, 0.2f, 0.2f, DARKGRAY);
+    }
 
     iteration++;
 }

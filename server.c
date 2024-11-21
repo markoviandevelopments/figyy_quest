@@ -70,6 +70,7 @@ Client *clients[MAX_CLIENTS];
 int client_count = 0;
 pthread_mutex_t clients_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+
 // Function to broadcast positions to all clients
 void broadcast_info() {
     char buffer[BUFFER_SIZE];
