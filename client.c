@@ -18,6 +18,7 @@
 #include "draw_prestonhouse.h"
 #include "draw_prestongame.h"
 #include "draw_epicgame.h"
+#include "draw_bouncer.h"
 
 #include "draw_willohgame.h"
 
@@ -108,7 +109,7 @@ void *receive_updates(void *args) {
             int id;
             float x, y, z;
             long double t;
-            printf("Recieved from Server:  %s\n", line_start);
+            //printf("Recieved from Server:  %s\n", line_start);
             if (sscanf(line_start, "%d %f %f %f %Lf %d %d %f", &id, &x, &y, &z, &t, &type_fserv, &state_fserv, &information_fserv) == 8) {
                 pthread_mutex_lock(&players_mutex);
                 // Update the remotePlayers array
@@ -262,6 +263,9 @@ int main(void) {
             ( ( player.position.z < 31.0f && player.position.y <= PLAYER_CAMERA_HEIGHT ) ||
             (player.position.z < 95.0f && player.position.y <= PLAYER_CAMERA_HEIGHT - 1.0f))) {
             player.position.y = PLAYER_CAMERA_HEIGHT;
+            if (player.position.z > 31.0f) {
+                player.position.y = PLAYER_CAMERA_HEIGHT - 1.0f;
+            }
             player.velocityY = 0.0f;
             player.isGrounded = true;
         } else {
@@ -357,7 +361,7 @@ int main(void) {
         // Send position to server
         char buffer[BUFFER_SIZE];
         snprintf(buffer, BUFFER_SIZE, "%d %f %f %f %d %d %f\n", my_id, player.position.x, player.position.y, player.position.z, type, state, information);
-        printf("Broadcasting to Server:  %s\n", buffer);
+        //printf("Broadcasting to Server:  %s\n", buffer);
         send(client_socket, buffer, strlen(buffer), 0);
 
         // Start drawing
@@ -369,7 +373,7 @@ int main(void) {
 
 
         int type_temp = -1;    // Allows each function to have a shot to return its type
-        int r_send = rand() % 3;  // Decides which function will pass its message
+        int r_send = rand() % 4;  // Decides which function will pass its message
 
         // Call all the external functions to draw shapes
         DrawChessboard(BOARD_SIZE, SQUARE_SIZE);
@@ -400,7 +404,14 @@ int main(void) {
 
 
 
-        printf("Memory:  %f  %f  %f  %f\n", memory_list[0], memory_list[1], memory_list[2], memory_list[3]);
+        type_temp = DrawBouncer(type_fserv, state_fserv, information_fserv, memory_list); //bouncer
+        if (type_temp >= 0 && r_send == 1) {
+            type = type_temp;
+        }
+
+
+
+        //printf("Memory:  %f  %f  %f  %f\n", memory_list[0], memory_list[1], memory_list[2], memory_list[3]);
 
 
 

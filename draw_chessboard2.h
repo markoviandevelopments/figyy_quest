@@ -17,7 +17,7 @@ void DrawChessboard2(int BOARD_SIZE, float SQUARE_SIZE) {
                 // Position the square
                 Vector3 position = {
                     (x - BOARD_SIZE / 2) * SQUARE_SIZE,
-                    -3.0f,
+                    -1.0f,
                     (z - BOARD_SIZE / 2) * SQUARE_SIZE + 64.0f
                 };
 

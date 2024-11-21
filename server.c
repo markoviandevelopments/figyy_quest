@@ -12,6 +12,7 @@
 
 #include "alter_prestongame.h"
 #include "alter_epicgame.h"
+#include "alter_bouncer.h"
 
 
 
@@ -57,6 +58,10 @@ int type;
 int state;
 float information;
 
+
+int iteration2 = 0;
+int r;
+
 // Memory List
 float memory_list[10] = {-1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f};
 
@@ -78,7 +83,10 @@ void broadcast_info() {
 
     // SECTION FOR HANDLING THE STATE OF OBJECTS AND THE BROADCASTING OF STATE INFORMATION TO CLIENTS
 
-    int r = rand() % 3;
+    srand(iteration2);
+    r = rand() % 4;
+    iteration2++;
+
     if (r == 0) {
         if (memory_list[0] <= -2.0f && memory_list[0] > -202.0f) {  // TO HANDLE alter_prestongame.h
             memory_list[0] -= 1.0f;
@@ -125,6 +133,66 @@ void broadcast_info() {
 
 
 
+    AlterBouncer(memory_list);
+
+    if (r == 3) {
+        int r2 = rand() % 4;
+
+        if (r2 == 0) {
+            if (memory_list[4] > -1) {  // For Bouncer
+                type_tclient = 3;
+                state_tclient = 0;
+                information_tclient = memory_list[4];
+            } else {
+                type_tclient = 3;
+                state_tclient = 0;
+                information_tclient = -1.0f;
+            }
+        }
+
+        if (r2 == 1) {
+            if (memory_list[5] > -1) {
+                type_tclient = 3;
+                state_tclient = 1;
+                information_tclient = memory_list[5];
+            } else {
+                type_tclient = 3;
+                state_tclient = 1;
+                information_tclient = -1.0f;
+            }
+        }
+
+        if (r2 == 2) {
+            if (memory_list[6] > -1) {
+                type_tclient = 3;
+                state_tclient = 2;
+                information_tclient = memory_list[6];
+            } else {
+                type_tclient = 3;
+                state_tclient = 2;
+                information_tclient = -1.0f;
+            }
+        }
+
+        if (r2 == 3) {
+            if (memory_list[7] > -1) {
+                type_tclient = 3;
+                state_tclient = 3;
+                information_tclient = memory_list[7];
+            } else {
+                type_tclient = 3;
+                state_tclient = 3;
+                information_tclient = -1.0f;
+            }
+        }
+
+
+
+    }
+
+
+
+
 
     // Serialize all information
     for (int i = 0; i < client_count; i++) {
@@ -134,7 +202,7 @@ void broadcast_info() {
     }
 
     // Debugging: Print the data being sent to clients
-    printf("Broadcasting to clients:  %s\n", buffer);
+    //printf("Broadcasting to clients:  %s\n", buffer);
 
     // Send the serialized positions to all connected clients
     for (int i = 0; i < client_count; i++) {
@@ -164,6 +232,7 @@ void *handle_client(void *arg) {
     int recv_buffer_len = 0;
     ssize_t bytes_read;
 
+
     // Send the assigned ID to the client
     char id_buffer[16];
     sprintf(id_buffer, "%d\n", client->player.id);
@@ -176,7 +245,7 @@ void *handle_client(void *arg) {
         recv_buffer[recv_buffer_len] = '\0';
 
 
-        printf("Recieved from client:  %s\n", buffer);
+        //printf("Recieved from client:  %s\n", buffer);
 
         // Process complete lines
         char *line_start = recv_buffer;
@@ -193,11 +262,11 @@ void *handle_client(void *arg) {
                 client->player.y = y;
                 client->player.z = z;
 
-                if (type == 0) {  // Handle alter_prestongame.h
+                if (type == 0) {  // Handle alter_prestongame.h (uses memory slot 0)
                     AlterPrestongame(type, state, information, memory_list);
                 }
 
-                if (type == 1) {  // Handle Preston's first two
+                if (type == 1) {  // Handle Preston's first two (uses memory slot 1)
                     AlterEpicgame(type, state, information, memory_list);
                 }
 
@@ -205,7 +274,9 @@ void *handle_client(void *arg) {
                     AlterPrestongame(type, state, information, memory_list);
                 }
 
-                printf("Memory:  %f  %f  %f  %f\n", memory_list[0], memory_list[1], memory_list[2], memory_list[3]);
+
+
+                //printf("Memory:  %f  %f  %f  %f\n", memory_list[0], memory_list[1], memory_list[2], memory_list[3]);
 
                 pthread_mutex_unlock(&clients_mutex);
             }

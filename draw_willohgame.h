@@ -36,7 +36,7 @@ void DrawWillohgame() {
     //blockPosition.z = position.z;
     //blockColor = cubeColor;
 
-    printf("iteration %d blockPosition: %f %f %f\n",iteration, blockPosition.x, blockPosition.y, blockPosition.z);
+    //printf("iteration %d blockPosition: %f %f %f\n",iteration, blockPosition.x, blockPosition.y, blockPosition.z);
 
     Vector3 blockPosition = (Vector3) {blockPosition.x, blockPosition.y, blockPosition.z};
 
