@@ -79,9 +79,6 @@ float memory_list[10] = {-1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f,
 // Score
 float score = 0;
 
-// Seed random!
-unsigned int seed = 69;
-srand(seed);
 
 long double server_time;
 
@@ -166,6 +163,9 @@ void *receive_updates(void *args) {
 }
 
 int main(void) {
+    // Seed random!
+    unsigned int seed = 69;
+    srand(seed);
 
     float total_time = 0;
     server_time = 0.0L;
@@ -257,7 +257,10 @@ int main(void) {
         player.position.y += player.velocityY * deltaTime;
 
         // Check collisions with the chessboard (ground)
-        if (player.position.y <= PLAYER_CAMERA_HEIGHT && player.position.x >= -33.0f && player.position.x <= 31.0f && player.position.z >= -33.0f && player.position.z < 31.0f) {
+        if (player.position.x >= -33.0f && player.position.x <= 31.0f &&
+            player.position.z >= -33.0f &&
+            ( ( player.position.z < 31.0f && player.position.y <= PLAYER_CAMERA_HEIGHT ) ||
+            (player.position.z < 95.0f && player.position.y <= PLAYER_CAMERA_HEIGHT - 1.0f))) {
             player.position.y = PLAYER_CAMERA_HEIGHT;
             player.velocityY = 0.0f;
             player.isGrounded = true;
