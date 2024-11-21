@@ -21,10 +21,6 @@ extern const int LOLLIPOP_COLOR_COUNT;
 // Function to draw a single lollipop tree
 static inline void DrawLollipopTree(LollipopTree tree) {
 
-    unsigned int seed = 69;
-    srand(seed);
-
-
     // Draw the lollipop stick
     Vector3 stickPosition = { tree.position.x, tree.position.y + tree.stickHeight / 2, tree.position.z };
     DrawCube(stickPosition, tree.stickRadius, tree.stickHeight, tree.stickRadius, tree.stickColor); // White stick

@@ -79,6 +79,9 @@ float memory_list[10] = {-1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f,
 // Score
 float score = 0;
 
+// Seed random!
+unsigned int seed = 69;
+srand(seed);
 
 long double server_time;
 
