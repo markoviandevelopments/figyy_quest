@@ -13,6 +13,7 @@
 
 #include "draw_tree.h"
 #include "draw_chessboard.h"
+#include "draw_chessboard2.h"
 #include "draw_pyramid.h"
 #include "draw_prestonhouse.h"
 #include "draw_prestongame.h"
@@ -253,10 +254,12 @@ int main(void) {
         player.position.y += player.velocityY * deltaTime;
 
         // Check collisions with the chessboard (ground)
-        if (player.position.y <= PLAYER_CAMERA_HEIGHT) {
+        if (player.position.y <= PLAYER_CAMERA_HEIGHT && player.position.x >= -33.0f && player.position.x <= 31.0f && player.position.z >= -33.0f && player.position.z < 31.0f) {
             player.position.y = PLAYER_CAMERA_HEIGHT;
             player.velocityY = 0.0f;
             player.isGrounded = true;
+        } else {
+            player.isGrounded = false;
         }
 
         // Handle movement input
@@ -364,6 +367,7 @@ int main(void) {
 
         // Call all the external functions to draw shapes
         DrawChessboard(BOARD_SIZE, SQUARE_SIZE);
+        DrawChessboard2(BOARD_SIZE, SQUARE_SIZE);
         DrawPyramid();
         // Draw the lollipop trees
         cat = DrawPrestonhouse(server_time);
