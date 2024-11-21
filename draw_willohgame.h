@@ -6,48 +6,32 @@
 extern const Color LOLLIPOP_COLOR_LIST[];
 extern const int LOLLIPOP_COLOR_COUNT;
 
+extern LollipopTree lollipopTrees[];
+
 int iteration = 0;
 
-Vector3 blockPosition; //= {14.0f, 1.9f, 13.0f}; 
-
-Color blockColor;
-
-float blockPosition_x;
-float blockPosition_y;
-float blockPosition_z;
-
-int activated = 0;
-
 void DrawWillohgame() {
-
-    Color cubeColor;
+    static Vector3 blockPosition_new;
+    static Color blockColor;
 
     if (iteration % 100 == 0) {
-        int lil_block = rand() % 142;
-        for (int i = 0; i < lil_block + 1; i++) {
-                blockPosition.x = (rand() % 32) * 1.0f - (16) * 1.0f;
-                blockPosition.y = 1.4f + (rand() % 10) * 0.1f;
-                blockPosition.z = (rand() % 32) * 1.0f - (16) * 1.0f;
-                blockColor = LOLLIPOP_COLOR_LIST[rand() % LOLLIPOP_COLOR_COUNT];
-                activated = 1;
-        }
+        int lilTreeIndex = rand() % 142;
+        LollipopTree lilTree = lollipopTrees[lilTreeIndex];
 
+        blockPosition_new = (Vector3){
+            lilTree.position.x,
+            lilTree.position.y + lilTree.stickHeight - 0.3f, 
+            lilTree.position.z
+        };
+
+        blockColor = lilTree.headColor;
     }
 
-    //blockPosition.x = position.x;
-    //blockPosition.y = position.y;
-    //blockPosition.z = position.z;
-    //blockColor = cubeColor;
-
-    //printf("iteration %d blockPosition: %f %f %f\n",iteration, blockPosition.x, blockPosition.y, blockPosition.z);
-
-    Vector3 blockPosition = (Vector3) {blockPosition.x, blockPosition.y, blockPosition.z};
+    printf("iteration %d blockPosition: %f %f %f\n",iteration, blockPosition_new.x, blockPosition_new.y, blockPosition_new.z);
 
     // Draw the square as a cube
-    if (activated) {
-        DrawCube(blockPosition, 0.2f, 0.2f, 0.2f, blockColor);
-        DrawCubeWires(blockPosition, 0.2f, 0.2f, 0.2f, DARKGRAY);
-    }
+    DrawCube(blockPosition_new, 0.4f, 0.4f, 0.4f, blockColor);
+    DrawCubeWires(blockPosition_new, 0.4f, 0.4f, 0.4f, DARKGRAY);
 
     iteration++;
 }
