@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "rlgl.h"
 
 void DrawChessboard2(int BOARD_SIZE, float SQUARE_SIZE) {
     for (int z = 0; z < BOARD_SIZE; z++) {
@@ -29,4 +30,6 @@ void DrawChessboard2(int BOARD_SIZE, float SQUARE_SIZE) {
 
 
 
+    Vector3 spherePosition = { 15.0f, 20000.0f + 10.0f * GetTime(), 40.0f };
+    DrawSphere(spherePosition, 19920.0f, PINK);
 }
