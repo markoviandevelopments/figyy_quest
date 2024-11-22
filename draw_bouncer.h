@@ -26,9 +26,13 @@ int DrawBouncer(int type_in, int state_in, float information_in, float memory_li
         }
         if (state_in == 2) {
             memory_list[6] = information_in;
+            memory_list[4] += memory_list[6];
+            memory_list[5] += memory_list[7];
         }
         if (state_in == 3) {
             memory_list[7] = information_in;
+            memory_list[4] += memory_list[6];
+            memory_list[5] += memory_list[7];
         }
 
     }

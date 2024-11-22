@@ -19,6 +19,8 @@
 #include "draw_prestongame.h"
 #include "draw_epicgame.h"
 #include "draw_bouncer.h"
+#include "draw_planets.h"
+
 
 #include "draw_willohgame.h"
 
@@ -382,6 +384,7 @@ int main(void) {
         // Draw the lollipop trees
         cat = DrawPrestonhouse(server_time);
         DrawLollipopTrees(lollipopTrees, TREE_COUNT);
+        DrawPlanets(server_time);
 
         DrawWillohgame();
 
