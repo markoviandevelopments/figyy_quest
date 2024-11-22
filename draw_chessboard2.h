@@ -30,6 +30,6 @@ void DrawChessboard2(int BOARD_SIZE, float SQUARE_SIZE) {
 
 
 
-    Vector3 spherePosition = { 15.0f, 20000.0f + 10.0f * GetTime(), 40.0f };
-    DrawSphere(spherePosition, 19920.0f, PINK);
+    Vector3 spherePosition = { 15.0f, 200.0f * sin(0.1f * GetTime()), 200.0f * cos(0.1f * GetTime())};
+    DrawSphere(spherePosition, 150.0f, PINK);
 }
