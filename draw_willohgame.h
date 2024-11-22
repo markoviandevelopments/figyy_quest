@@ -15,7 +15,7 @@ Color GetInverseColor(Color color) {
         255 - color.r,
         255 - color.g,
         255 - color.b,
-        color.a
+        color.a = 255
     };
     return inverseColor;
 }
@@ -45,3 +45,4 @@ void DrawWillohgame() {
 
     iteration++;
 }
+
