@@ -10,6 +10,16 @@ extern LollipopTree lollipopTrees[];
 
 int iteration = 0;
 
+Color GetInverseColor(Color color) {
+    Color inverseColor = {
+        255 - color.r,
+        255 - color.g,
+        255 - color.b,
+        color.a
+    };
+    return inverseColor;
+}
+
 void DrawWillohgame() {
     static Vector3 blockPosition_new;
     static Color blockColor;
@@ -24,7 +34,7 @@ void DrawWillohgame() {
             lilTree.position.z
         };
 
-        blockColor = lilTree.headColor;
+        blockColor = GetInverseColor(lilTree.headColor);
     }
 
     printf("iteration %d blockPosition: %f %f %f\n",iteration, blockPosition_new.x, blockPosition_new.y, blockPosition_new.z);
@@ -35,4 +45,3 @@ void DrawWillohgame() {
 
     iteration++;
 }
-
