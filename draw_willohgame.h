@@ -37,7 +37,7 @@ void DrawWillohgame() {
         blockColor = GetInverseColor(lilTree.headColor);
     }
 
-    printf("iteration %d blockPosition: %f %f %f\n",iteration, blockPosition_new.x, blockPosition_new.y, blockPosition_new.z);
+    // printf("iteration %d blockPosition: %f %f %f\n",iteration, blockPosition_new.x, blockPosition_new.y, blockPosition_new.z);
 
     // Draw the square as a cube
     DrawCube(blockPosition_new, 0.4f, 0.4f, 0.4f, blockColor);
